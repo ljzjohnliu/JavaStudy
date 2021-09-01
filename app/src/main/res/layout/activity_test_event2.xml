@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.study.java.event.DecoreViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99990000"
+    android:focusableInTouchMode="true">
+
+    <com.study.java.event.DecoreView
+        android:id="@+id/button1"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:background="#99009900"
+        android:text="按钮1" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="按钮2" />
+
+</com.study.java.event.DecoreViewGroup>

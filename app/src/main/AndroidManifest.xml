@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".event.TestEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".event.TestEventActivity2"
+            android:exported="true" />
     </application>
 
 </manifest>
