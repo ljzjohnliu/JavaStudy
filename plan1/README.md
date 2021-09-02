@@ -9,6 +9,7 @@
 
 ## 2、Android知识点
 (1)[Android事件分发详解](https://www.jianshu.com/p/38015afcdb58)
+(2)[Android 异步通信：图文详解Handler机制工作原理](https://blog.csdn.net/carson_ho/article/details/80175876)
 
 ## 3、算法部分
 (1)[如何在一个 1 到 100 的整数数组中找到丢失的数字?](https://blog.csdn.net/feilang00/article/details/95312062)

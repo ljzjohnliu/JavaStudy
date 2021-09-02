@@ -1,4 +1,4 @@
-package com.study.java;
+package com.study.java.leecode;
 
 public class Test {
 
