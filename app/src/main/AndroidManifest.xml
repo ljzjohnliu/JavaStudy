@@ -25,6 +25,11 @@
             android:exported="true" />
         <activity
             android:name=".handler.HandlerActivity"
+            android:label="Handler简单用法"
+            android:exported="true" />
+        <activity
+            android:name=".handler.HandlerActivity2"
+            android:label="HandlerThread和Thread区别"
             android:exported="true" />
     </application>
 

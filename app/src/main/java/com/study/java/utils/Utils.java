@@ -27,8 +27,9 @@ public class Utils {
         //Process.myTid() is the linux thread ID
         //线程ID,一个进程中可以有多个线程。每个进程有一个默认线程，称为主线程，通常为UI线程，其ID与进程ID相同
         int threadId2 = android.os.Process.myTid();
-        return "Print info : myPid = " + myPid + ", myUid = " + myUid + ", mainThreadId = "
-                + mainThreadId + ", threadId1 = " + threadId1 + ", threadId2 = " + threadId2;
+//        return "Print info : myPid = " + myPid + ", myUid = " + myUid + ", mainThreadId = "
+//                + mainThreadId + ", threadId1 = " + threadId1 + ", threadId2 = " + threadId2;
+        return "Print info : 进程id = " + myPid + ", 主线程id = " + mainThreadId + ", 当前线程id = " + threadId1;
     }
 
     public static boolean checkPhoneNumber(String phoneNum) {
