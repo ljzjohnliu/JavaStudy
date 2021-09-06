@@ -1,4 +1,4 @@
-package com.study.java.handler;
+package com.study.android.handler;
 
 import android.os.Handler;
 import android.os.Message;

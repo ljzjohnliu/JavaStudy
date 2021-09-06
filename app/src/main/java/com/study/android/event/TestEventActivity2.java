@@ -1,4 +1,4 @@
-package com.study.java.event;
+package com.study.android.event;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.study.java.R;
+import com.study.android.R;
 
 public class TestEventActivity2 extends AppCompatActivity {
     private static final String TAG = "TestEventActivity";

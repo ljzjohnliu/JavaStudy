@@ -1,10 +1,9 @@
-package com.study.java.utils;
+package com.study.android.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Looper;
-import android.util.Log;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

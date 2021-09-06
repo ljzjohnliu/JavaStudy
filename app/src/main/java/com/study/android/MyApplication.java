@@ -1,4 +1,4 @@
-package com.study.java;
+package com.study.android;
 
 import android.app.Application;
 import android.content.Context;

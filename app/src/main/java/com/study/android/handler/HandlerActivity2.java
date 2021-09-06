@@ -1,4 +1,4 @@
-package com.study.java.handler;
+package com.study.android.handler;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,12 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.study.java.R;
-import com.study.java.utils.Utils;
+import com.study.android.R;
+import com.study.android.utils.Utils;
 
 public class HandlerActivity2 extends AppCompatActivity {
 

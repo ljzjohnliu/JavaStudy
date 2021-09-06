@@ -1,11 +1,11 @@
-package com.study.java.handler;
+package com.study.android.handler;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-import com.study.java.utils.Utils;
+import com.study.android.utils.Utils;
 
 public class MyThread extends Thread {
     private static final String TAG = "MyThread";

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.study.java">
+    package="com.study.android">
 
     <application
-        android:name=".MyApplication"
+        android:name="com.study.android.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JavaStudy">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name="com.study.android.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,21 +19,21 @@
         </activity>
 
         <activity
-            android:name=".event.TestEventActivity"
+            android:name="com.study.android.event.TestEventActivity"
             android:exported="true" />
         <activity
-            android:name=".event.TestEventActivity2"
+            android:name="com.study.android.event.TestEventActivity2"
             android:exported="true" />
         <activity
-            android:name=".handler.HandlerActivity"
+            android:name="com.study.android.handler.HandlerActivity"
             android:exported="true"
             android:label="Handler简单用法" />
         <activity
-            android:name=".handler.HandlerActivity2"
+            android:name="com.study.android.handler.HandlerActivity2"
             android:exported="true"
             android:label="HandlerThread和Thread区别" />
         <activity
-            android:name=".handler.LeakHandlerActivity"
+            android:name="com.study.android.handler.LeakHandlerActivity"
             android:exported="true"
             android:label="LeakHandlerActivity" />
     </application>
