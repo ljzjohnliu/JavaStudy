@@ -10,4 +10,8 @@ public class Shap {
         System.out.println("Shape.print()");
         draw();
     }
+
+    public static Object getObj() {
+        return "Obj";
+    }
 }

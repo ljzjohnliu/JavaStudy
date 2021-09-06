@@ -16,7 +16,7 @@ public class Test {
          * 但是向上转型存在一些缺憾，那就是它必定会导致一些方法和属性的丢失，而导致我们不能够获取它们。
          * 所以父类类型的引用可以调用父类中定义的所有属性和方法，对于只存在与子类中的方法和属性它就望尘莫及了---1。(使用强制类型转换向下转型依然可以访问到的)
          */
-        Shap square = new Square();
+        Square square = new Square();
         Shap circle = new Circle();
 
         /**
@@ -29,5 +29,6 @@ public class Test {
          */
         square.print();
 //        square.draw(2);//这里会报错，因为父类没有该方法
+        System.out.println("getObj : " + square.getObj());
     }
 }
