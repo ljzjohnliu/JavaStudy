@@ -23,7 +23,7 @@ public class Outer2 {
     }
 
     public static void main(String[] args) {
-        Outer2.Inner inner = new Inner();
+        Outer2.Inner inner = new Outer2.Inner();
         inner.test();
     }
 }

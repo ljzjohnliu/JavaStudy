@@ -27,7 +27,8 @@ public class Outer1 {
      * 这一点和外部类有一点不一样，外部类只能被public和包访问两种权限修饰。
      * 由于成员内部类看起来像是外部类的一个成员，所以可以像类的成员一样拥有多种权限修饰。
      */
-    private class Inner1 {
+    public class Inner1 {
+
         public void test() {
             System.out.println(name);  //外部类的private成员
             System.out.println(count);   //外部类的静态成员
@@ -43,6 +44,26 @@ public class Outer1 {
         Outer1.Inner1 inner1 = outer1.new Inner1();
         inner1.test();
         //第二种方式
-        Outer1.Inner1 inner2 = outer1.getInnerInstance();
+//        Outer1.Inner1 inner2 = outer1.getInnerInstance();
+    }
+}
+
+/**
+ * 补充一点知识：关于成员内部类的继承问题。一般来说，内部类是很少用来作为继承用的。但是当用来继承的话，要注意两点：
+ *
+ * 　　1）成员内部类的引用方式必须为 Outter.Inner.
+ *
+ * 　　2）构造器中必须有指向外部类对象的引用，并通过这个引用调用super()。这段代码摘自《Java编程思想》
+ */
+class InheritInner extends Outer1.Inner1 {
+
+    // InheritInner() 是不能通过编译的，一定要加上形参
+    InheritInner(Outer1 outer1) {
+        outer1.super(); //必须有这句调用
+    }
+
+    public static void main(String[] args) {
+        Outer1 outer1 = new Outer1("test");
+        InheritInner obj = new InheritInner(outer1);
     }
 }
