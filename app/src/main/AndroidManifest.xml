@@ -40,6 +40,12 @@
             android:name="com.study.android.anr.ANRActivity"
             android:exported="true"
             android:label="ANRActivity" />
+
+        <service
+            android:name="com.study.android.anr.ANRService"
+            android:exported="true"
+            android:label="anr_service"
+            android:priority="1000" />
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ public class ANRActivity extends AppCompatActivity {
 
     private TextView sleepTv;
     private TextView otherTv;
+    private TextView startServiceTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class ANRActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anr);
         sleepTv = findViewById(R.id.sleep_tv);
         otherTv = findViewById(R.id.other_tv);
+        startServiceTv = findViewById(R.id.start_service);
 
         /**
          * 1.对Thread.sleep(long duration)的认知。
@@ -59,11 +61,11 @@ public class ANRActivity extends AppCompatActivity {
             sleepTv.setText("sleepTv 30s!!");
         });
 
-        otherTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("TAG", "otherTv, is onClicked!!!");
-            }
+        otherTv.setOnClickListener(v -> Log.d("TAG", "otherTv, is onClicked!!!"));
+
+        startServiceTv.setOnClickListener(v -> {
+            Log.d("TAG", "startServiceTv, is onClicked!!!");
+            ANRService.startUpdate(ANRActivity.this, "http://moni-download.com");
         });
     }
 }
