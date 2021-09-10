@@ -16,9 +16,12 @@ import com.study.android.utils.ProcessUtil;
  * Android 跨进程通信大总结
  * 1、activity进程间通信
  * 2、activity、service 进程间通信 AIDL
- * 3、SharedPreferences 跨进程
+ * 3、ContentProvider跨进程
  * 4、广播跨进程
- * 5、ContentProvider跨进程
+ * 5、SharedPreferences 跨进程(类似MMKV一样原理)
+ * 6、文件共享跨进程
+ * 7、Socket跨进程通信
+ * 8、Bundle跨进程
  */
 public class RemoteActivity extends AppCompatActivity {
 
