@@ -1,5 +1,7 @@
 package com.study.android.anr;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ public class ANRActivity extends AppCompatActivity {
     private TextView sleepTv;
     private TextView otherTv;
     private TextView startServiceTv;
+    private TextView sendBroadcastTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class ANRActivity extends AppCompatActivity {
         sleepTv = findViewById(R.id.sleep_tv);
         otherTv = findViewById(R.id.other_tv);
         startServiceTv = findViewById(R.id.start_service);
+        sendBroadcastTv = findViewById(R.id.send_broadcast);
 
         /**
          * 1.对Thread.sleep(long duration)的认知。
@@ -66,6 +70,25 @@ public class ANRActivity extends AppCompatActivity {
         startServiceTv.setOnClickListener(v -> {
             Log.d("TAG", "startServiceTv, is onClicked!!!");
             ANRService.startUpdate(ANRActivity.this, "http://moni-download.com");
+        });
+
+        /**
+         * 原因在于这个广播 是“隐式” 发送的，8.0中，静态注册的广播接收者无法接受 隐式 广播。
+         * 为了解决这个问题，有两个方法：
+         * 1 在Activity或其他组件中动态注册广播
+         * 2 发送显示广播
+         */
+        sendBroadcastTv.setOnClickListener(v -> {
+            Log.d("TAG", "sendBroadcastTv, is onClicked!!!");
+//            Intent intent = new Intent();
+//            intent.setAction("com.study.android.anr.Action");
+//            intent.setComponent( new ComponentName( "com.study.android" ,
+//                    "com.study.android.anr.MyReceiver") );
+//            sendBroadcast(intent);
+
+            Intent intent=new Intent();
+            intent.setComponent(new ComponentName(ANRActivity.this, ANRReceiver.class));
+            sendBroadcast(intent);
         });
     }
 }
