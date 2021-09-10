@@ -1,23 +1,40 @@
 package com.study.android.activity;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.study.android.R;
+import com.study.android.communicate.RemoteActivity;
+import com.study.android.utils.ProcessUtil;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String KEY_FROM = "KEY_FROM";
+    public static final int RESULT_FROM_REMOTE = 1001;
+
     private TextView titleTv;
+
+    private ActivityResultLauncher myActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == RESULT_FROM_REMOTE) {
+            String name = result.getData().getStringExtra(KEY_FROM);
+            titleTv.setText("来自Remote的value:" + name);
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         titleTv = findViewById(R.id.title);
+        titleTv.setText(ProcessUtil.getCurrentProcessName());
 
         /**
          * 匿名内部类应该是平时我们编写代码时用得最多的，在编写事件监听的代码时使用匿名内部类不但方便，而且使代码更加容易维护。
@@ -34,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //D TAG     : onClick: title!!! this = com.study.android.activity.MainActivity$1@58f606c
                 Log.d("TAG", "onClick: title!!! this = " + this);
+                Intent mainIntent = new Intent(MainActivity.this, RemoteActivity.class);
+                mainIntent.putExtra(KEY_FROM, "main process");
+                myActivityLauncher.launch(mainIntent);
             }
         });
     }

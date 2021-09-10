@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JavaStudy">
-        <activity android:name="com.study.android.activity.MainActivity">
+        <activity android:name="com.study.android.activity.MainActivity"
+            android:label="MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,6 +64,18 @@
             android:name="com.study.android.communicate.ThreadCommunicateActivity"
             android:exported="true"
             android:label="ANRActivity" />
+
+        <activity
+            android:name="com.study.android.communicate.RemoteActivity"
+            android:exported="true"
+            android:label="RemoteActivity"
+            android:process=":remote" />
+
+        <service
+            android:name="com.study.android.communicate.RemoteService"
+            android:exported="true"
+            android:label="RemoteService"
+            android:priority="1000" />
     </application>
 
 </manifest>
