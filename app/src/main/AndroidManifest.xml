@@ -58,6 +58,11 @@
                 <action android:name="com.study.android.anr.Action" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.study.android.communicate.ThreadCommunicateActivity"
+            android:exported="true"
+            android:label="ANRActivity" />
     </application>
 
 </manifest>
