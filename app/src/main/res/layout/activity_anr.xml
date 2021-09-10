@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sleep_tv" />
 
     <TextView
-        android:id="@+id/start_service"
+        android:id="@+id/start_anr_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -46,6 +46,32 @@
         app:layout_constraintTop_toBottomOf="@+id/other_tv" />
 
     <TextView
+        android:id="@+id/start_my_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_12dp_yellow"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="8dp"
+        android:text="Start MyService"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_anr_service" />
+
+    <TextView
+        android:id="@+id/start_my_service2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_12dp_yellow"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="8dp"
+        android:text="Start MyService2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_my_service" />
+
+    <TextView
         android:id="@+id/send_broadcast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,6 +82,6 @@
         android:text="Send Broadcast"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_service" />
+        app:layout_constraintTop_toBottomOf="@+id/start_my_service2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

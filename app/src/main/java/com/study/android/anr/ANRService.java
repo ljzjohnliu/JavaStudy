@@ -7,6 +7,8 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.study.android.utils.Utils;
+
 public class ANRService extends Service {
     private final String TAG = "ANRService";
     public static final String P_DOWNLOAD_URL = "download_url";
@@ -41,6 +43,7 @@ public class ANRService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand:  getPids = " + Utils.getPids());
         if (intent == null) {
             return START_REDELIVER_INTENT;
         }
@@ -52,12 +55,12 @@ public class ANRService extends Service {
          * 不一致，有待考究
          */
         try {
-            Log.d("TAG", "Simulate network requests start");
+            Log.d(TAG, "Simulate network requests start");
             Thread.sleep(9999);
-            Log.d("TAG", "Simulate network requests end");
+            Log.d(TAG, "Simulate network requests end");
         } catch (InterruptedException e) {
             e.printStackTrace();
-            Log.d("TAG", "Simulate network requests e = " + e);
+            Log.d(TAG, "Simulate network requests e = " + e);
         }
 
         return START_REDELIVER_INTENT;

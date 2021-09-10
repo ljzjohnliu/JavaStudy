@@ -47,6 +47,12 @@
             android:label="anr_service"
             android:priority="1000" />
 
+        <service
+            android:name="com.study.android.anr.MyService"
+            android:exported="true"
+            android:label="my_service"
+            android:priority="1000" />
+
         <receiver android:name=".anr.ANRReceiver">
             <intent-filter>
                 <action android:name="com.study.android.anr.Action" />

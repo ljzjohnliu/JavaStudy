@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-public class ANRReceiver extends BroadcastReceiver {
+import com.study.android.utils.Utils;
 
+public class ANRReceiver extends BroadcastReceiver {
+    private final String TAG = "ANRReceiver";
     /**
      * BroadcastReceiver未在10秒内完成相关的处理
      * 这个理解可能有误，跟Activity一样，
@@ -26,15 +28,15 @@ public class ANRReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("TAG", "ANRReceiver, onReceive: ");
+        Log.d(TAG, "ANRReceiver, onReceive: getPids = " + Utils.getPids());
         Toast.makeText(context, "Intent Detected.", Toast.LENGTH_LONG).show();
         try {
-            Log.d("TAG", "Simulate network requests start");
+            Log.d(TAG, "Simulate network requests start");
             Thread.sleep(20000);
-            Log.d("TAG", "Simulate network requests end");
+            Log.d(TAG, "Simulate network requests end");
         } catch (InterruptedException e) {
             e.printStackTrace();
-            Log.d("TAG", "Simulate network requests e = " + e);
+            Log.d(TAG, "Simulate network requests e = " + e);
         }
     }
 }
