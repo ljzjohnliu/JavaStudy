@@ -24,6 +24,9 @@
 
 　　4.方便编写线程代码.
 
+(5)[java 多线程同步锁](https://blog.csdn.net/yangzhaomuma/article/details/51236976)
+
+
 ## 2、Android知识点
 (1)[Android事件分发详解](https://www.jianshu.com/p/38015afcdb58)
 
@@ -74,6 +77,10 @@ static final int CONTENT_PROVIDER_PUBLISH_TIMEOUT = 10*1000;
 (5)[Android 跨进程通信大总结](https://blog.csdn.net/zhaoyanjun6/article/details/111553746)
 
 其实Android的四大组件都是支持跨进程通信的
+
+(6)[LruCache 使用及原理](https://www.jianshu.com/p/e09870b60046)
+
+
 
 ## 3、算法部分
 (1)[如何在一个 1 到 100 的整数数组中找到丢失的数字?](https://blog.csdn.net/feilang00/article/details/95312062)
