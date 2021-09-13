@@ -26,6 +26,9 @@
 
 (5)[java 多线程同步锁](https://blog.csdn.net/yangzhaomuma/article/details/51236976)
 
+[java线程知识总结](http://www.51gjie.com/java/719.html)
+
+
 
 ## 2、Android知识点
 (1)[Android事件分发详解](https://www.jianshu.com/p/38015afcdb58)
