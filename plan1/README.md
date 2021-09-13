@@ -31,9 +31,49 @@
 
 (3)[Android ANR 分析](https://www.jianshu.com/p/108299cecd90)
 
+[主线程中Thread.Sleep()是否会导致ANR？](https://blog.csdn.net/zhangqunshuai/article/details/82455503)
+
+在android里面对导致ANR的耗时时常进行了常量定义
+Android N 的 ANR时间
+
+Service 超时
+
+// How long we wait for a service to finish executing.
+
+static final int SERVICE_TIMEOUT = 20*1000; // 前台
+
+// How long we wait for a service to finish executing.
+
+static final int SERVICE_BACKGROUND_TIMEOUT = SERVICE_TIMEOUT * 10; // 后台
+
+Broadcast 超时
+
+// How long we allow a receiver to run before giving up on it.
+
+static final int BROADCAST_FG_TIMEOUT = 10*1000;  // 前台
+
+static final int BROADCAST_BG_TIMEOUT = 60*1000;  // 后台
+
+InputDispatching 超时
+
+ // How long we wait until we timeout on key dispatching.
+
+ static final int KEY_DISPATCHING_TIMEOUT = 5*1000;
+
+ontentProvider 超时
+
+// How long we wait for an attached process to publish its content providers
+
+// before we decide it must be hung.
+
+static final int CONTENT_PROVIDER_PUBLISH_TIMEOUT = 10*1000;
+
+
 (4)[Android中的几种线程间通信方式](https://blog.csdn.net/small_and_smallworld/article/details/72791384)
 
 (5)[Android 跨进程通信大总结](https://blog.csdn.net/zhaoyanjun6/article/details/111553746)
+
+其实Android的四大组件都是支持跨进程通信的
 
 ## 3、算法部分
 (1)[如何在一个 1 到 100 的整数数组中找到丢失的数字?](https://blog.csdn.net/feilang00/article/details/95312062)

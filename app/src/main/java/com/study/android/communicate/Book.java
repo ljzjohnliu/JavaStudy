@@ -8,7 +8,11 @@ public class Book implements Parcelable {
     public String title;
 
     Book() {
+        this("默认的书名");
+    }
 
+    Book(String name) {
+        this.title = name;
     }
 
     protected Book(Parcel in) {
