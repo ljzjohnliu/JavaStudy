@@ -1,4 +1,4 @@
-package com.study.java.singleton;
+package com.study.java.design.singleton;
 
 /**
  * 单例模式——懒汉式
