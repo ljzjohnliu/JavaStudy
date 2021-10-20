@@ -78,6 +78,18 @@
             android:label="RemoteService"
             android:priority="1000"
             android:process=":remote" />
+
+        <!-- 验证Fragment切换生命周期 -->
+        <activity
+            android:name=".testfrag.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity android:name=".testfrag.viewpager.ViewPagerActivity" />
+        <activity android:name=".testfrag.ShowActivity" />
+        <activity android:name=".testfrag.ReplaceActivity" />
+        <activity android:name=".testfrag.OtherShowActivity" />
+        <activity android:name=".testfrag.AttachActivity" />
+        <activity android:name=".testfrag.SingleActivity" />
     </application>
 
 </manifest>
