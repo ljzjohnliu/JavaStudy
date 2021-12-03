@@ -4,6 +4,11 @@ import com.study.java.base.Shap;
 import com.study.java.sub.Circle;
 import com.study.java.sub.Square;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Test {
 
     public static void main(String[] args) {
@@ -30,5 +35,18 @@ public class Test {
         square.print();
 //        square.draw(2);//这里会报错，因为父类没有该方法
         System.out.println("getObj : " + square.getObj());
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse("2000-01-01 00:00:00");
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+        Calendar calender = Calendar.getInstance();
+        calender.setTime(date);
+        System.out.println(format.format(calender.getTime()));
+        System.out.println(calender.get(Calendar.YEAR));
+        System.out.println(calender.get(Calendar.MONTH));
     }
 }
