@@ -34,19 +34,37 @@ public class Test {
          */
         square.print();
 //        square.draw(2);//这里会报错，因为父类没有该方法
-        System.out.println("getObj : " + square.getObj());
+//        System.out.println("getObj : " + square.getObj());
+//
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        Date date = null;
+//        try {
+//            date = format.parse("2000-01-01 00:00:00");
+//        } catch (ParseException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        Calendar calender = Calendar.getInstance();
+//        calender.setTime(date);
+//        System.out.println(format.format(calender.getTime()));
+//        System.out.println(calender.get(Calendar.YEAR));
+//        System.out.println(calender.get(Calendar.MONTH));
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date = null;
-        try {
-            date = format.parse("2000-01-01 00:00:00");
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
-        Calendar calender = Calendar.getInstance();
-        calender.setTime(date);
-        System.out.println(format.format(calender.getTime()));
-        System.out.println(calender.get(Calendar.YEAR));
-        System.out.println(calender.get(Calendar.MONTH));
+        String s = new String("aaa");
+        String ns = Test.appendStr(s);
+        System.out.println("String aaa>>>" + s.toString());
+        // StringBuilder做参数
+        StringBuilder sb = new StringBuilder("aaa");
+        StringBuilder nsb = Test.appendSb(sb);
+        System.out.println("StringBuilder aaa >>>" + sb.toString());
+    }
+
+    // 不可变的String
+    public static String appendStr(String s) {
+        s += "bbb";
+        return s;
+    }
+    // 可变的StringBuilder
+    public static StringBuilder appendSb(StringBuilder sb) {
+        return sb.append("bbb");
     }
 }
