@@ -25,11 +25,21 @@
             android:exported="true" />
         <activity
             android:name="com.study.android.lifecycle.ActivityB"
-            android:exported="true" />
+            android:launchMode="standard"
+            android:taskAffinity="ljz.xxx.uuuu"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.test.b" />
+                <data
+                    android:host="www.ljz.com"
+                    android:scheme="xxx" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.study.android.lifecycle.ActivityC"
-            android:theme="@style/Theme.AppCompat.Dialog"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Dialog" />
 
         <activity
             android:name="com.study.android.communicate.ProcessComActivity"

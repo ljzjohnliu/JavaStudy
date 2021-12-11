@@ -1,7 +1,10 @@
 package com.study.android.lifecycle;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +15,8 @@ import com.study.android.R;
 import com.study.android.communicate.ProcessComActivity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,17 +25,31 @@ public class ActivityA extends AppCompatActivity {
     private static final String TAG = "AAAAAA";
 
     SeriesDataset mDataset;
+    ArrayList<String> mList = new ArrayList<String>();
 
     @OnClick({R.id.start_activity_b, R.id.start_dialog_activity})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.start_activity_b:
-                intent.setClass(this, ActivityB.class);
+//                intent.setClass(this, ActivityB.class);
+                intent.setAction("com.test.b");
+                for (int i = 0; i < 1024*10; i++) {
+                    mList.add("" + i);
+                }
+                Log.d(TAG, "onClick: mList size = " + mList.size());
+                intent.putStringArrayListExtra("list", mList);
+                intent.setData(Uri.parse("xxx://www.ljz.com"));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 break;
             case R.id.start_dialog_activity:
                 intent.setClass(this, ActivityC.class);
                 break;
+        }
+        try {
+            createPackageContext("", Context.CONTEXT_IGNORE_SECURITY);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
         startActivity(intent);
     }

@@ -9,11 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.study.android.R;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ActivityB extends AppCompatActivity {
     private static final String TAG = "BBBBBB";
+
+    ArrayList<String> mList;
 
     @OnClick({R.id.return_activity_a})
     public void onClick(View view) {
@@ -29,9 +33,13 @@ public class ActivityB extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "------onCreate: ");
         setContentView(R.layout.activity_b);
         ButterKnife.bind(this);
+        if (getIntent() != null) {
+            mList = getIntent().getStringArrayListExtra("list");
+            Log.d(TAG, "------onCreate: mList size = " + mList.size());
+        }
+        Log.d(TAG, "------onCreate: ");
     }
 
     @Override
