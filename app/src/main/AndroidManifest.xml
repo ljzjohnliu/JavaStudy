@@ -25,9 +25,9 @@
             android:exported="true" />
         <activity
             android:name="com.study.android.lifecycle.ActivityB"
+            android:exported="true"
             android:launchMode="standard"
-            android:taskAffinity="ljz.xxx.uuuu"
-            android:exported="true">
+            android:taskAffinity="ljz.xxx.uuuu">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="com.test.b" />
@@ -40,6 +40,12 @@
             android:name="com.study.android.lifecycle.ActivityC"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Dialog" />
+
+        <activity
+            android:name="com.study.android.service.TestServiceActivity"
+            android:exported="true" />
+
+        <service android:name="com.study.android.service.TestService" />
 
         <activity
             android:name="com.study.android.communicate.ProcessComActivity"

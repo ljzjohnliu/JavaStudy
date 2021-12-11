@@ -8,29 +8,39 @@
     tools:context="com.study.android.activity.MainActivity">
 
     <Button
-        android:id="@+id/test_activity_life"
+        android:id="@+id/start_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="测试Activity生命周期"
+        android:text="Start Service"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/test_service_life"
+        android:id="@+id/stop_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="测试Service生命周期"
+        android:text="Stop Service"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/test_process_comm"
+        android:id="@+id/bind_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="测试跨进程通信"
+        android:text="Bind Service"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/unbind_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Unbind Service"
+        android:textAllCaps="false" />
+
 </LinearLayout>

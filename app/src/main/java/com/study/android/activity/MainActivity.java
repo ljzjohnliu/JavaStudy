@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.study.android.R;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.lifecycle.ActivityA;
+import com.study.android.service.TestServiceActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.test_activity_life, R.id.test_process_comm})
+    @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_process_comm})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -38,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
 //                intent.setClass(this, ActivityA.class);
                 intent.setComponent(new ComponentName("com.study.android", "com.study.android.lifecycle.ActivityA"));
                 break;
+            case R.id.test_service_life:
+                intent.setClass(this, TestServiceActivity.class);
+                break;
             case R.id.test_process_comm:
-                // 此方法不能实现跨应用调用
                 intent.setClass(this, ProcessComActivity.class);
                 break;
         }
