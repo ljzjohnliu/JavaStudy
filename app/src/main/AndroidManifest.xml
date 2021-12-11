@@ -21,6 +21,20 @@
         </activity>
 
         <activity
+            android:name="com.study.android.lifecycle.ActivityA"
+            android:exported="true" />
+        <activity
+            android:name="com.study.android.lifecycle.ActivityB"
+            android:exported="true" />
+        <activity
+            android:name="com.study.android.lifecycle.ActivityC"
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:exported="true" />
+
+        <activity
+            android:name="com.study.android.communicate.ProcessComActivity"
+            android:exported="true" />
+        <activity
             android:name="com.study.android.event.TestEventActivity"
             android:exported="true" />
         <activity

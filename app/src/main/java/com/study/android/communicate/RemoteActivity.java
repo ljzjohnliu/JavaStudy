@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.study.android.R;
-import com.study.android.activity.MainActivity;
 import com.study.android.utils.ProcessUtil;
 
 /**
@@ -33,7 +32,7 @@ public class RemoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_remote);
         titleTv = findViewById(R.id.title);
         titleTv.setText(ProcessUtil.getCurrentProcessName());
-        String name = getIntent().getStringExtra(MainActivity.KEY_FROM);
+        String name = getIntent().getStringExtra(ProcessComActivity.KEY_FROM);
         titleTv.setText("来自Main的value:" + name);
 
         titleTv.setOnClickListener(new View.OnClickListener() {
@@ -41,8 +40,8 @@ public class RemoteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("TAG", "onClick: title!!! this = " + this);
                 Intent intent = new Intent();
-                intent.putExtra(MainActivity.KEY_FROM, "remote activity");
-                setResult(MainActivity.RESULT_FROM_REMOTE, intent);
+                intent.putExtra(ProcessComActivity.KEY_FROM, "remote activity");
+                setResult(ProcessComActivity.RESULT_FROM_REMOTE, intent);
                 finish();
             }
         });

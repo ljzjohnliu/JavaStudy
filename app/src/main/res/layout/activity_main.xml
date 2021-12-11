@@ -1,40 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.study.android.activity.MainActivity">
 
-    <TextView
-        android:id="@+id/title"
+    <Button
+        android:id="@+id/test_activity_life"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="测试Activity生命周期"
+        android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/remote_activity"
+        android:id="@+id/test_process_comm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="通过Activity实现跨进程通信"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        android:text="测试跨进程通信"
+        android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/get_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="通过AIDL跨进程修改Book的name"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remote_activity" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
