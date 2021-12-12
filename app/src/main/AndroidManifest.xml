@@ -65,6 +65,10 @@
             android:exported="true"
             android:label="HandlerThread和Thread区别" />
         <activity
+            android:name="com.study.android.handler.HandlerActivity3"
+            android:exported="true"
+            android:label="Handler延迟消息的分析" />
+        <activity
             android:name="com.study.android.handler.LeakHandlerActivity"
             android:exported="true"
             android:label="LeakHandlerActivity" />
