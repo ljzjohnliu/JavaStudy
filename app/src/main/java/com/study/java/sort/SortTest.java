@@ -67,5 +67,39 @@ public class SortTest {
 //            }
 //        });
 //        System.out.println("给学生按名字字母顺序排序：" + list);
+
+        int[] nums1 = new int[]{1, 3};
+        int[] nums2 = new int[]{2, 4};
+        double mid = findMedianSortedArrays(nums1, nums2);
+        System.out.println(" mid = " + mid);
+    }
+
+    /**
+     * 给定两个大小为 m 和 n 的有序数组 nums1 和 nums2 。
+     *
+     * 请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log (m+n)) 。
+     */
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int nums1L = nums1.length;
+        int nums2L = nums2.length;
+        double result = 0;
+        int i = 0, j = 0, k = 0;
+        int[] num = new int[nums1L + nums2L];
+        while (i < nums1L && j < nums2L) {
+            if (nums1[i] < nums2[j]) num[k++] = nums1[i++];
+            else num[k++] = nums2[j++];
+        }
+        while (i == nums1L && j < nums2L) {
+            num[k++] = nums2[j++];
+        }
+        while (i < nums1L && j == nums2L) {
+            num[k++] = nums1[i++];
+        }
+        if (num.length % 2 == 0) {
+            result = ((double) (num[num.length / 2] + num[num.length / 2 - 1])) / 2;
+        } else {
+            result = (double) (num[num.length / 2]);
+        }
+        return result;
     }
 }
