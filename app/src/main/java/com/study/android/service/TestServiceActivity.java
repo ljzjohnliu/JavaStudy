@@ -43,7 +43,7 @@ public class TestServiceActivity extends AppCompatActivity {
         }
     };
 
-    @OnClick({R.id.start_service, R.id.stop_service, R.id.bind_service, R.id.unbind_service})
+    @OnClick({R.id.start_service, R.id.stop_service, R.id.bind_service, R.id.unbind_service, R.id.start_test_activity})
     public void onClick(View view) {
         Intent intent = new Intent(this, TestService.class);
         switch (view.getId()) {
@@ -65,6 +65,9 @@ public class TestServiceActivity extends AppCompatActivity {
                     Toast.makeText(this, "当前未绑定任何Service!", Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.start_test_activity:
+                startActivity(new Intent(this, TestServiceActivity.class));
+                break;
         }
     }
 
@@ -73,6 +76,7 @@ public class TestServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_service);
         ButterKnife.bind(this);
+        Log.d(TAG, "onCreate: this  = " + this);
     }
 
     @Override

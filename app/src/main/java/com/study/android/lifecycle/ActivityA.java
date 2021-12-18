@@ -1,9 +1,9 @@
 package com.study.android.lifecycle;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +12,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.study.android.R;
-import com.study.android.communicate.ProcessComActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,13 +32,13 @@ public class ActivityA extends AppCompatActivity {
             case R.id.start_activity_b:
 //                intent.setClass(this, ActivityB.class);
                 intent.setAction("com.test.b");
-                for (int i = 0; i < 1024*10; i++) {
+                for (int i = 0; i < 10; i++) {
                     mList.add("" + i);
                 }
                 Log.d(TAG, "onClick: mList size = " + mList.size());
                 intent.putStringArrayListExtra("list", mList);
                 intent.setData(Uri.parse("xxx://www.ljz.com"));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 break;
             case R.id.start_dialog_activity:
                 intent.setClass(this, ActivityC.class);
@@ -57,7 +55,15 @@ public class ActivityA extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "------onCreate: ");
+
+        Log.d(TAG, "------onCreate: savedInstanceState = " + savedInstanceState);
+        if (savedInstanceState != null) {
+            SeriesDataset dataset = (SeriesDataset) savedInstanceState.getSerializable("dataset");
+            Log.d(TAG, "------onCreate: dataset = " + dataset);
+            if (dataset != null) {
+                Log.d(TAG, "------onCreate: name = " + dataset.getName() + ", state = " + dataset.getState());
+            }
+        }
         setContentView(R.layout.activity_a);
         ButterKnife.bind(this);
         mDataset = new SeriesDataset();
@@ -114,6 +120,20 @@ public class ActivityA extends AppCompatActivity {
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: newConfig.orientation = " + newConfig.orientation);
+        switch (newConfig.orientation) {
+            case Configuration.ORIENTATION_PORTRAIT:
+                break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                break;
+            case Configuration.ORIENTATION_UNDEFINED:
+                break;
+        }
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // save the current data, for instance when changing screen orientation
@@ -128,6 +148,9 @@ public class ActivityA extends AppCompatActivity {
         // orientation
         mDataset = (SeriesDataset) savedState.getSerializable("dataset");
         Log.d(TAG, "------onRestoreInstanceState: savedState = " + savedState);
+        if (mDataset != null) {
+            Log.d(TAG, "------onRestoreInstanceState: name = " + mDataset.getName() + ", state = " + mDataset.getState());
+        }
     }
 
     public static class SeriesDataset implements Serializable {

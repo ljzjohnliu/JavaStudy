@@ -43,6 +43,12 @@ public class ActivityB extends AppCompatActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d(TAG, "------onNewIntent: ");
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "------onStart: ");
