@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.study.android.R;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.handler.HandlerActivity3;
+import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.service.TestServiceActivity;
 
 import butterknife.BindView;
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_process_comm, R.id.test_handler})
+    @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver,
+            R.id.test_process_comm, R.id.test_handler})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.test_service_life:
                 intent.setClass(this, TestServiceActivity.class);
+                break;
+            case R.id.test_receiver:
+                intent.setClass(this, TestBroadcastActivity.class);
                 break;
             case R.id.test_process_comm:
                 intent.setClass(this, ProcessComActivity.class);

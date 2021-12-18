@@ -45,6 +45,10 @@
             android:name="com.study.android.service.TestServiceActivity"
             android:exported="true" />
 
+        <activity
+            android:name="com.study.android.receiver.TestBroadcastActivity"
+            android:exported="true" />
+
         <service android:name="com.study.android.service.TestService" />
 
         <activity

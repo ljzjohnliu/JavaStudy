@@ -8,47 +8,39 @@
     tools:context="com.study.android.activity.MainActivity">
 
     <Button
-        android:id="@+id/test_activity_life"
+        android:id="@+id/register_local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="测试Activity生命周期"
+        android:text="注册本地广播"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/test_service_life"
+        android:id="@+id/unregister_local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="测试Service生命周期"
+        android:text="注销本地广播"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/test_receiver"
+        android:id="@+id/local_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="测试各种广播"
+        android:text="验证本地广播"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/test_process_comm"
+        android:id="@+id/local_send_sync"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="测试跨进程通信"
+        android:text="验证同步本地广播"
         android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/test_handler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="测试Handler"
-        android:textAllCaps="false" />
 </LinearLayout>
