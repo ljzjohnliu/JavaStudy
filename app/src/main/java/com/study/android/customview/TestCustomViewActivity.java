@@ -22,7 +22,7 @@ public class TestCustomViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_custom);
         ButterKnife.bind(this);
 
-        headView.setTitle("这是标题");
+//        headView.setTitle("这是标题");
         headView.setLeftListener(view -> Log.d(TAG, "left icon is onClicked!"));
         headView.setRightListener(view -> Log.d(TAG, "right icon is onClicked!"));
     }

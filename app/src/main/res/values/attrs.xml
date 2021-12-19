@@ -12,5 +12,14 @@
     <declare-styleable name="HeaderView">
         <attr name="background" format="reference" />
         <attr name="titleColor" format="reference" />
+        <attr name="titleText" format="string" />
+        <attr name="showViews">
+            <flag name="left_text" value="0x01" />
+            <flag name="left_img" value="0x02" />
+            <flag name="right_text" value="0x04" />
+            <flag name="right_img" value="0x08" />
+            <flag name="center_text" value="0x10" />
+            <flag name="center_img" value="0x20" />
+        </attr>
     </declare-styleable>
 </resources>

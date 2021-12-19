@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:background="@color/color_4b3bf2"
-        app:titleColor="@color/colorLabelYellow"/>
+        app:titleColor="@color/colorLabelYellow"
+        app:titleText="布局中设置的标题"
+        app:showViews="left_img|center_text|right_img"/>
 
     <com.study.android.customview.TestView
         android:layout_width="120dp"
