@@ -22,4 +22,8 @@
             <flag name="center_img" value="0x20" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="LineTextView">
+        <attr name="lineColor" format="reference" />
+    </declare-styleable>
 </resources>

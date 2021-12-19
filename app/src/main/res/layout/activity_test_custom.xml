@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:background="@color/color_4b3bf2"
+        app:showViews="left_img|center_text|right_img"
         app:titleColor="@color/colorLabelYellow"
-        app:titleText="布局中设置的标题"
-        app:showViews="left_img|center_text|right_img"/>
+        app:titleText="布局中设置的标题" />
 
     <com.study.android.customview.TestView
         android:layout_width="120dp"
@@ -32,5 +32,15 @@
         android:background="#0000FF00"
         app:innerColor="@color/black"
         app:text="hello world" />
+
+    <com.study.android.customview.LineTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="4dp"
+        android:text="Just a test"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:lineColor="@color/green"/>
 
 </LinearLayout>

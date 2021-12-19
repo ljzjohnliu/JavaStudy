@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.study.android.R;
 
 /**
- *
+ * 组合控件
  */
 public class HeaderView extends RelativeLayout {
 
