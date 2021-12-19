@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.study.android.R;
 import com.study.android.communicate.ProcessComActivity;
+import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.handler.HandlerActivity3;
 import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.service.TestServiceActivity;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver,
-            R.id.test_process_comm, R.id.test_handler})
+            R.id.test_process_comm, R.id.test_handler, R.id.test_custom_view})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.test_handler:
                 intent.setClass(this, HandlerActivity3.class);
+                break;
+            case R.id.test_custom_view:
+                intent.setClass(this, TestCustomViewActivity.class);
                 break;
         }
         startActivity(intent);
