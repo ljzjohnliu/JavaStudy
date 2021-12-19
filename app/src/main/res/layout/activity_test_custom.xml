@@ -7,11 +7,18 @@
     android:orientation="vertical"
     tools:context="com.study.android.activity.MainActivity">
 
+    <com.study.android.customview.HeaderView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:background="@color/color_4b3bf2"
+        app:titleColor="@color/colorLabelYellow"/>
+
     <com.study.android.customview.TestView
         android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:background="#9900FF00"
+        android:background="#0000FF00"
         app:text="hello world"
         app:txtSize="520" />
 
@@ -20,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="6dp"
-        android:background="#9900FF00"
+        android:background="#0000FF00"
         app:innerColor="@color/black"
         app:text="hello world" />
 

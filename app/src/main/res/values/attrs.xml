@@ -8,4 +8,9 @@
     <declare-styleable name="SelfView">
         <attr name="innerColor" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="HeaderView">
+        <attr name="background" format="reference" />
+        <attr name="titleColor" format="reference" />
+    </declare-styleable>
 </resources>
