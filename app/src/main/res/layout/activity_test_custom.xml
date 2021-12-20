@@ -43,4 +43,32 @@
         android:textSize="16sp"
         app:lineColor="@color/green"/>
 
+    <com.study.android.customview.HorizontalView
+        android:id="@+id/test_layout"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="#0000FF00">
+        <ListView
+            android:id="@+id/list1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+        <ListView
+            android:id="@+id/list2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+        <ListView
+            android:id="@+id/list3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </com.study.android.customview.HorizontalView>
+
 </LinearLayout>
