@@ -17,6 +17,7 @@ import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.handler.HandlerActivity3;
 import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.service.TestServiceActivity;
+import com.study.android.testfrag.AttachActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver,
-            R.id.test_process_comm, R.id.test_handler, R.id.test_custom_view})
+            R.id.test_process_comm, R.id.test_handler, R.id.test_custom_view, R.id.test_fragment})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.test_custom_view:
                 intent.setClass(this, TestCustomViewActivity.class);
+                break;
+            case R.id.test_fragment:
+                intent.setClass(this, AttachActivity.class);
                 break;
         }
         startActivity(intent);

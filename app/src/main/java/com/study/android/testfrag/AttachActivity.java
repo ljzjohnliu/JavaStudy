@@ -1,7 +1,9 @@
 package com.study.android.testfrag;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import butterknife.OnClick;
 
 public class AttachActivity extends AppCompatActivity {
 
+    private static final String TAG = "AttachActivity";
     private HomeFragment homeFragment;
     private FilmFragment filmFragment;
     private MeFragment meFragment;
@@ -52,7 +55,50 @@ public class AttachActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_layout);
         ButterKnife.bind(this);
+        Log.d(TAG, "------onCreate: ");
         initTab(0);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d(TAG, "------onNewIntent: ");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "------onStart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "------onResume: ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "------onPause: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "------onStop: ");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "------onRestart: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "------onDestroy: ");
     }
 
     private void initTab(int i) {
@@ -99,11 +145,18 @@ public class AttachActivity extends AppCompatActivity {
         meText.setTextColor(Color.BLACK);
     }
 
+    /**
+     * 使用detach()会将view从viewtree中删除,和remove()不同,此时fragment的状态依然保持着,
+     * 在使用attach()时会再次调用onCreateView()来重绘视图,注意使用detach()后fragment.isAdded()方法将返回false,
+     * 在使用attach()还原fragment后isAdded()会依然返回false(需要再次确认)
+     */
     private void hideFragments(FragmentTransaction transaction) {
         if (filmFragment != null) {
+            Log.d(TAG, "hideFragments: detach filmFragment");
             transaction.detach(filmFragment);
         }
         if (homeFragment != null) {
+            Log.d(TAG, "hideFragments: detach homeFragment");
             transaction.detach(homeFragment);
         }
 

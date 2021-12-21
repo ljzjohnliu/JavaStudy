@@ -100,6 +100,10 @@ public class ShowActivity extends AppCompatActivity implements MeFragment.testDa
         meText.setTextColor(Color.BLACK);
     }
 
+    /**
+     * 使用hide()方法只是隐藏了fragment的view并没有将view从viewtree中删除,随后可用show()方法将view设置为显示
+     *
+     */
     private void hideFragments(FragmentTransaction transaction) {
         if (filmFragment != null) {
             transaction.hide(filmFragment);

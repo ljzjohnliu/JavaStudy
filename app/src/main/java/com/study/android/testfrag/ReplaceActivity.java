@@ -62,6 +62,9 @@ public class ReplaceActivity extends AppCompatActivity {
         initTab(0);
     }
 
+    /**
+     * 使用replace()替换后会将之前的fragment的view从viewtree中删除
+     */
     private void initTab(int i) {
         //开启事务，fragment的控制是由事务来实现的
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

@@ -1,6 +1,7 @@
 package com.study.android.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        Log.d("BaseFragment", "onCreateView: ");
         View rootView = inflater.inflate(setLayoutResourceID(), container, false);
         setUpView();
         return rootView;
