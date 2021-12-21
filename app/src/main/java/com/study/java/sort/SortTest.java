@@ -1,9 +1,11 @@
 package com.study.java.sort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class SortTest {
     static class Student {
@@ -24,7 +26,7 @@ public class SortTest {
         }
     }
 
-    public static void main(String[] args) {
+    public static void testStudentComparator() {
         List<Student> list = new ArrayList<>();
         list.add(new Student(4, "StudentD", 1));
         list.add(new Student(5, "StudentA", 3));
@@ -50,9 +52,9 @@ public class SortTest {
 
             @Override
             public int compare(Student o1, Student o2) {
-                int brandResult = levelComparator.compare(o1, o2);
-                if (brandResult != 0) {
-                    return brandResult;
+                int levelResult = levelComparator.compare(o1, o2);
+                if (levelResult != 0) {
+                    return levelResult;
                 }
 
                 return o2.age - o1.age;
@@ -67,11 +69,42 @@ public class SortTest {
 //            }
 //        });
 //        System.out.println("给学生按名字字母顺序排序：" + list);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{9, 5, 6, 3, 7, 9, 0, 1, 3};
+        testHeap(arr);
 
         int[] nums1 = new int[]{1, 3};
         int[] nums2 = new int[]{2, 4};
         double mid = findMedianSortedArrays(nums1, nums2);
         System.out.println(" mid = " + mid);
+        testStudentComparator();
+    }
+
+    public static void testHeap(int[] arr) {
+        Comparator<Integer> compare = new Comparator<Integer>() {
+            /**
+             * 规则：
+             * 如果返回负数，认为第一个参数应该放在上面
+             * 如果返回正数，认为第二个参数应该放在上面
+             * 如果返回0，认为谁放上面都行
+             */
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        };
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(arr.length, compare);
+        for (int i = 0; i < arr.length; i++) {
+            minHeap.add(arr[i]);
+        }
+        int j = 0;
+        while(!minHeap.isEmpty()) {
+            arr[j++] = minHeap.poll();
+        }
+        System.out.println(Arrays.toString(arr));
     }
 
     /**
