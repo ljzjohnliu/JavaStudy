@@ -39,6 +39,7 @@ public class MyThread extends Thread {
             }
         };
         Looper.loop();
+        //注意：loop之后的代码不会被执行，因为loop会阻塞住无消息的时候
     }
 
     /**

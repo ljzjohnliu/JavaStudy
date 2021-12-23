@@ -7,6 +7,26 @@
     android:orientation="vertical"
     tools:context="com.study.android.activity.MainActivity">
 
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Hello World!"
+        />
+
+    <Button
+        android:id="@+id/test_thread_updateui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="测试子线程更新UI问题"
+        android:textAllCaps="false" />
+
     <Button
         android:id="@+id/test_activity_life"
         android:layout_width="wrap_content"
