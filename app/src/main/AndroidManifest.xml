@@ -65,6 +65,10 @@
             android:name="com.study.android.event.TestEventActivity2"
             android:exported="true" />
         <activity
+            android:name="com.study.android.handler.SyncBarrierActivity"
+            android:exported="true"
+            android:label="Handler同步屏障验证" />
+        <activity
             android:name="com.study.android.handler.HandlerActivity"
             android:exported="true"
             android:label="Handler简单用法" />

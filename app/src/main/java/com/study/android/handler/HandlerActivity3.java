@@ -102,17 +102,5 @@ public class HandlerActivity3 extends AppCompatActivity {
                 mainHandler.sendMessageDelayed(msg, 1000);
             }
         });
-
-//        Thread lShowToastThread = new Thread() {
-//            @Override
-//            public void run() {
-//                Log.d(TAG, "lShowToastThread, run " + Utils.getPids());
-//                Looper.prepare();
-//                String toast = " program has crashed";
-//                Toast.makeText(HandlerActivity.this, toast, Toast.LENGTH_LONG).show();
-//                Looper.loop();
-//            }
-//        };
-//        lShowToastThread.start();
     }
 }

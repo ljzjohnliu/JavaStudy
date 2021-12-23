@@ -14,6 +14,7 @@ import com.study.android.R;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.handler.HandlerActivity2;
+import com.study.android.handler.SyncBarrierActivity;
 import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.service.TestServiceActivity;
 import com.study.android.testfrag.AttachActivity;
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
     TextView titleTv;
 
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver,
-            R.id.test_process_comm, R.id.test_handler, R.id.test_custom_view, R.id.test_fragment,
-            R.id.test_thread_updateui})
+            R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
+            R.id.test_fragment, R.id.test_thread_updateui})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.test_handler:
                 intent.setClass(this, HandlerActivity2.class);
+                break;
+            case R.id.test_handler_barrier:
+                intent.setClass(this, SyncBarrierActivity.class);
                 break;
             case R.id.test_custom_view:
                 intent.setClass(this, TestCustomViewActivity.class);
