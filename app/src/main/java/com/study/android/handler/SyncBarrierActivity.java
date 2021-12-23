@@ -1,5 +1,6 @@
 package com.study.android.handler;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -70,7 +71,7 @@ public class SyncBarrierActivity extends AppCompatActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            Log.d(TAG, "MyHandler, handleMessage: msg = " + msg);
+            Log.d(TAG, "MyHandler, handleMessage: msg.obj = " + msg.obj + ", isAsynchronous = " + msg.isAsynchronous());
         }
     }
 
@@ -97,11 +98,29 @@ public class SyncBarrierActivity extends AppCompatActivity {
         }
     });
 
+    private Handler asyncHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sync_barrier);
         ButterKnife.bind(this);
         Log.d(TAG, "onCreate: " + Utils.getPids());
+
+        /**
+         * 异步Handler发送的消息都是异步消息
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            asyncHandler = Handler.createAsync(Looper.getMainLooper());
+            Message msg = Message.obtain();
+            msg.obj = "****异步消息****";
+            asyncHandler.sendMessage(msg);
+            asyncHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "run: ------asyncHandler-----");
+                }
+            });
+        }
     }
 }
