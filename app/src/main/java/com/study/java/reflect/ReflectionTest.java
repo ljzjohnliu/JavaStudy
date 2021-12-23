@@ -105,7 +105,7 @@ public class ReflectionTest {
             System.out.print(" " + method.getName());
         }
         System.out.println();
-        Method getNameMethod = clazz.getDeclaredMethod("getName", null);
+        Method getNameMethod = clazz.getDeclaredMethod("getName");
         System.out.print(" " + getNameMethod.getName());
         System.out.println();
         //  这样写是获取不到的，如果方法的参数类型是int型

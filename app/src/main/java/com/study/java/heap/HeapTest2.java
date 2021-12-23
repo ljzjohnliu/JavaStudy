@@ -47,8 +47,13 @@ public class HeapTest2 {
          * 所以返回常量池中对象的引用地址。所以为false
          */
         String c1 = new StringBuilder().append("aaa").append("ccc").toString();
+        String c2 = new StringBuilder().append("aaa").append("ccc").toString();
         System.out.println("c1 : " + System.identityHashCode(c1));
+        System.out.println("c2 : " + System.identityHashCode(c2));
+        System.out.println("c1 intern : " + System.identityHashCode(c1.intern()));
+        System.out.println("c2 intern : " + System.identityHashCode(c2.intern()));
         System.out.println(c1.intern() == c1);
+        System.out.println(c2.intern() == c2);
 
         String d1 = new StringBuilder().append("aaa").append("bbb").toString();
         System.out.println("d1 : " + System.identityHashCode(d1));

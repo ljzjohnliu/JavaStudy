@@ -13,9 +13,65 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.study.android.R;
 import com.study.android.utils.Utils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class HandlerActivity extends AppCompatActivity {
 
     private static final String TAG = "HandlerActivity";
+    @BindView(R.id.test_tv)
+    TextView testTv;
+
+    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4})
+    public void onClick(View view) {
+        //btn1和btn2发送消息并不能验证在非主线程通知UI线程刷新UI，因为这几个消息都是在主线程中发出的！！！
+        switch (view.getId()) {
+            case R.id.btn1:
+                //方式1、使用sendMessage
+                Message msg = Message.obtain();
+                msg.what = 1;
+                msg.obj = "来自Button1的刷新UI操作";
+                mainHandler.sendMessage(msg);//注意一个消息不能同时被多个Handler发送！
+                break;
+            case R.id.btn2:
+                //方式2、使用Handler.post（）
+                mHandler2.post(() -> {
+                    Log.d(TAG, "mHandler.post, run: ---------" + Utils.getPids());
+                    testTv.setText("来自PostRunnable的刷新");
+                });
+                break;
+            case R.id.btn3:
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        //这里打印的是线程2的信息，因为它是运行在线程2中的
+                        Log.d(TAG, "Thread1 run: " + Utils.getPids());
+                        Message msg = Message.obtain();
+                        msg.what = 2;
+                        msg.obj = "子线程1刷新UI";
+                        mainHandler.sendMessage(msg);
+                    }
+                }.start();
+                break;
+            case R.id.btn4:
+                new Thread() {
+                    @Override
+                    public void run() {
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //这里打印的是主线程的信息，因为它是运行在mainHandler所在的线程的
+                                Log.d(TAG, "Thread2 mHandler.post, run: ---------" + Utils.getPids());
+                                testTv.setText("来自PostRunnable的刷新");
+                            }
+                        });
+                    }
+                }.start();
+                break;
+        }
+    }
 
     //自定义Handler子类（继承Handler类） & 复写handleMessage（）方法
     class MyHandler extends Handler {
@@ -26,7 +82,7 @@ public class HandlerActivity extends AppCompatActivity {
             Log.d(TAG, "MyHandler, handleMessage: msg = " + msg);
             switch (msg.what) {
                 case 2:
-                    testTv.setText((String)msg.obj);
+                    testTv.setText((String) msg.obj);
                 default:
                     break;
             }
@@ -47,8 +103,9 @@ public class HandlerActivity extends AppCompatActivity {
     /**
      * 方式2：匿名内部类
      * 在主线程中 通过匿名内部类 创建Handler类对象
+     * 这里创建的其实是绑定了主线程Looper和MessageQueue的Handler
      */
-    private Handler mHandler2 = new Handler(){
+    private Handler mHandler2 = new Handler() {
         // 通过复写handlerMessage()从而确定更新UI的操作
         @Override
         public void handleMessage(Message msg) {
@@ -57,71 +114,12 @@ public class HandlerActivity extends AppCompatActivity {
         }
     };
 
-    private TextView testTv;
-    private Button btn1, btn2, btn3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler);
-        testTv = findViewById(R.id.test_tv);
-        btn1 = findViewById(R.id.btn1);
-        btn2 = findViewById(R.id.btn2);
-        btn3 = findViewById(R.id.btn3);
+        ButterKnife.bind(this);
         Log.d(TAG, "onCreate: " + Utils.getPids());
-
-        //btn1和btn2发送消息并不能验证在非主线程通知UI线程刷新UI，因为这几个消息都是在主线程中发出的！！！
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //方式1、使用sendMessage
-                Message msg = Message.obtain();
-                msg.what = 1;
-                msg.obj = "来自Button1的刷新UI操作";
-                mainHandler.sendMessage(msg);//注意一个消息不能同时被多个Handler发送！
-            }
-        });
-
-        btn2.setOnClickListener(v -> {
-            //方式2、使用Handler.post（）
-            mHandler2.post(() -> {
-                Log.d(TAG, "mHandler.post, run: ---------");
-                testTv.setText("来自PostRunnable的刷新");
-            });
-        });
-
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        super.run();
-                        Log.d(TAG, "Thread1 run: " + Utils.getPids());
-                        Message msg = Message.obtain();
-                        msg.what = 2;
-                        msg.obj = "子线程1刷新UI";
-                        mainHandler.sendMessage(msg);
-                    }
-                }.start();
-
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Log.d(TAG, "Thread2 run: " + Utils.getPids());
-                        Message msg = Message.obtain();
-                        msg.what = 2;
-                        msg.obj = "子线程2刷新UI";
-                        mainHandler.sendMessage(msg);
-                    }
-                }.start();
-            }
-        });
 
 //        Thread lShowToastThread = new Thread() {
 //            @Override

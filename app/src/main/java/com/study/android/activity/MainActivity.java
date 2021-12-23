@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.study.android.R;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.customview.TestCustomViewActivity;
+import com.study.android.handler.HandlerActivity;
+import com.study.android.handler.HandlerActivity2;
 import com.study.android.handler.HandlerActivity3;
 import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.service.TestServiceActivity;
@@ -40,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
 //                Looper.prepare();
 //                Handler handler = new Handler();
 //                Looper.loop();
+                //注意：loop之后的代码不会被执行，因为loop会阻塞住无消息的时候
                 Log.d(TAG, "run: thread id = " + Thread.currentThread().getId());
-//                testActivityLife.setText("hello");
+                testActivityLife.setText("hello");
                 testActivityLife.invalidate();
             }
         }.start();
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.setClass(this, ProcessComActivity.class);
                 break;
             case R.id.test_handler:
-                intent.setClass(this, HandlerActivity3.class);
+                intent.setClass(this, HandlerActivity2.class);
                 break;
             case R.id.test_custom_view:
                 intent.setClass(this, TestCustomViewActivity.class);
