@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
-public class TestEventActivity2 extends AppCompatActivity {
+public class TestEventActivity2 extends BaseSimpleActivity {
     private static final String TAG = "TestEventActivity";
 
     DecoreView decoreView;

@@ -8,9 +8,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.handler.HandlerActivity2;
@@ -18,20 +17,21 @@ import com.study.android.handler.SyncBarrierActivity;
 import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.service.TestServiceActivity;
 import com.study.android.testfrag.AttachActivity;
+import com.study.android.videoview.TestDealBitmapActivity;
 import com.study.android.videoview.TestVideoViewActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseSimpleActivity {
     private static final String TAG = "MainActivity";
     @BindView(R.id.title_tv)
     TextView titleTv;
 
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver,
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
-            R.id.test_video_view, R.id.test_fragment, R.id.test_thread_updateui})
+            R.id.test_video_view, R.id.test_deal_bitmap, R.id.test_fragment, R.id.test_thread_updateui})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.test_video_view:
                 intent.setClass(this, TestVideoViewActivity.class);
+                break;
+            case R.id.test_deal_bitmap:
+                intent.setClass(this, TestDealBitmapActivity.class);
                 break;
             case R.id.test_fragment:
                 intent.setClass(this, AttachActivity.class);

@@ -7,15 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ANRActivity extends AppCompatActivity {
+public class ANRActivity extends BaseSimpleActivity {
     private final String TAG = "ANRActivity";
 
     @BindView(R.id.sleep_tv)

@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ActivityB extends AppCompatActivity {
+public class ActivityB extends BaseSimpleActivity {
     private static final String TAG = "BBBBBB";
 
     ArrayList<String> mList;

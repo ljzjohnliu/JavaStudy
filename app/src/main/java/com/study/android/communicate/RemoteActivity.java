@@ -6,9 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.utils.ProcessUtil;
 
 /**
@@ -22,7 +21,7 @@ import com.study.android.utils.ProcessUtil;
  * 7、Socket跨进程通信
  * 8、Bundle跨进程
  */
-public class RemoteActivity extends AppCompatActivity {
+public class RemoteActivity extends BaseSimpleActivity {
 
     private TextView titleTv;
 

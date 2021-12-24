@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TestCustomViewActivity extends AppCompatActivity {
+public class TestCustomViewActivity extends BaseSimpleActivity {
     private static final String TAG = "TestCustomView";
 
     @BindView(R.id.head_view)

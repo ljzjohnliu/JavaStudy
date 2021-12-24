@@ -7,19 +7,17 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HandlerActivity2 extends AppCompatActivity {
+public class HandlerActivity2 extends BaseSimpleActivity {
 
     private static final String TAG = "HandlerActivity2";
     @BindView(R.id.test_tv)

@@ -3,14 +3,14 @@ package com.study.android.testfrag;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.fragment.SingleFragment;
 
-public class SingleActivity extends AppCompatActivity {
+public class SingleActivity extends BaseSimpleActivity {
 
     private SingleFragment singleFragment;
 

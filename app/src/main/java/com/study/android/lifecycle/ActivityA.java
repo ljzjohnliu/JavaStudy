@@ -9,9 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ActivityA extends AppCompatActivity {
+public class ActivityA extends BaseSimpleActivity {
     private static final String TAG = "AAAAAA";
 
     SeriesDataset mDataset;

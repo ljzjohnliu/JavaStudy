@@ -11,16 +11,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SyncBarrierActivity extends AppCompatActivity {
+public class SyncBarrierActivity extends BaseSimpleActivity {
 
     private static final String TAG = "SyncBarrier";
     @BindView(R.id.test_tv)

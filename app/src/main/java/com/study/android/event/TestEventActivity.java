@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
-public class TestEventActivity extends AppCompatActivity {
+public class TestEventActivity extends BaseSimpleActivity {
     private static final String TAG = "TestEventActivity";
 
     Button button1, button2;

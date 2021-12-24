@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.fragment.BaseFragment;
 import com.study.android.fragment.FilmFragment;
 import com.study.android.fragment.HomeFragment;
@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OtherShowActivity extends AppCompatActivity {
+public class OtherShowActivity extends BaseSimpleActivity {
     private HomeFragment homeFragment;
     private FilmFragment filmFragment;
     private MeFragment meFragment;

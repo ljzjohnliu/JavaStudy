@@ -7,12 +7,11 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
 import com.study.android.activity.MainActivity;
+import com.study.android.base.BaseSimpleActivity;
 
-public class LeakHandlerActivity extends AppCompatActivity {
+public class LeakHandlerActivity extends BaseSimpleActivity {
 
     private static final String TAG = "LeakHandler";
 

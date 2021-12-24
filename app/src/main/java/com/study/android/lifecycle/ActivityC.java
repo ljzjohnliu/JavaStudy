@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ActivityC extends AppCompatActivity {
+public class ActivityC extends BaseSimpleActivity {
     private static final String TAG = "CCCCCC";
 
     @OnClick({R.id.return_activity_a})

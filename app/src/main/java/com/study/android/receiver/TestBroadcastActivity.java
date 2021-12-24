@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TestBroadcastActivity extends AppCompatActivity {
+public class TestBroadcastActivity extends BaseSimpleActivity {
     private static final String TAG = "TestBroadcast";
     private static final String LOCAL_BROADCAST_ACTION = "com.ljz.local.action";
 

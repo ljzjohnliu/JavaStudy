@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.fragment.FilmFragment;
 import com.study.android.fragment.HomeFragment;
 import com.study.android.fragment.MeFragment;
@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AttachActivity extends AppCompatActivity {
+public class AttachActivity extends BaseSimpleActivity {
 
     private static final String TAG = "AttachActivity";
     private HomeFragment homeFragment;

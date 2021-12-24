@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.utils.ProcessUtil;
 import com.study.android.utils.Utils;
 
@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProcessComActivity extends AppCompatActivity {
+public class ProcessComActivity extends BaseSimpleActivity {
     private static final String TAG = "ProcessComActivity";
     public static final String KEY_FROM = "KEY_FROM";
     public static final int RESULT_FROM_REMOTE = 1001;

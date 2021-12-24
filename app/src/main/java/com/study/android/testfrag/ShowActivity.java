@@ -8,10 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.fragment.FilmFragment;
 import com.study.android.fragment.HomeFragment;
 import com.study.android.fragment.MeFragment;
@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShowActivity extends AppCompatActivity implements MeFragment.testDataCallback {
+public class ShowActivity extends BaseSimpleActivity implements MeFragment.testDataCallback {
     private HomeFragment homeFragment;
     private FilmFragment filmFragment;
     private MeFragment meFragment;

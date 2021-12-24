@@ -1,25 +1,21 @@
 package com.study.android.service;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
-import com.study.android.lifecycle.ActivityC;
+import com.study.android.base.BaseSimpleActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TestServiceActivity extends AppCompatActivity {
+public class TestServiceActivity extends BaseSimpleActivity {
     private static final String TAG = "TestSerActivity";
 
     private boolean isBind = false;

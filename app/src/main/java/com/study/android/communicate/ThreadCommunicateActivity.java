@@ -8,9 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.utils.Utils;
 
 import butterknife.BindView;
@@ -27,7 +26,7 @@ import butterknife.OnClick;
  *
  * 这里主要验证子线程刷新UI线程的场景
  */
-public class ThreadCommunicateActivity extends AppCompatActivity {
+public class ThreadCommunicateActivity extends BaseSimpleActivity {
     private final String TAG = "ThreadCommunicate";
 
     private Activity mActivity;

@@ -8,12 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.study.android.R;
+import com.study.android.base.BaseSimpleActivity;
 import com.study.android.utils.Utils;
 
-public class HandlerActivity3 extends AppCompatActivity {
+public class HandlerActivity3 extends BaseSimpleActivity {
 
     private static final String TAG = "HandlerActivity";
 

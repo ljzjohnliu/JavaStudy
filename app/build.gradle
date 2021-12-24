@@ -60,4 +60,7 @@ dependencies {
     implementation 'com.gu.android:toolargetool:0.3.0'
 
     implementation 'org.openjdk.jol:jol-core:0.9'
+
+    api "io.reactivex.rxjava3:rxjava:3.0.8"
+    api 'me.jessyan:autosize:1.2.1'
 }
