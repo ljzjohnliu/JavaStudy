@@ -18,14 +18,12 @@
         android:text="Hello World!"
         />
 
-    <Button
-        android:id="@+id/test_thread_updateui"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.study.android.videoview.PencilView
+        android:id="@+id/pencil_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="测试子线程更新UI问题"
-        android:textAllCaps="false" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/test_activity_life"
@@ -88,15 +86,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="自定义View"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/test_video_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="学习video view相关"
         android:textAllCaps="false" />
 
     <Button

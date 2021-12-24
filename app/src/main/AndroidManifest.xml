@@ -53,6 +53,10 @@
             android:name="com.study.android.customview.TestCustomViewActivity"
             android:exported="true" />
 
+        <activity
+            android:name="com.study.android.videoview.TestVideoViewActivity"
+            android:exported="true" />
+
         <service android:name="com.study.android.service.TestService" />
 
         <activity
