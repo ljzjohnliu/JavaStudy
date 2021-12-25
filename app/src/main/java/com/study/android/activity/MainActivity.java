@@ -18,6 +18,7 @@ import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.service.TestServiceActivity;
 import com.study.android.testfrag.AttachActivity;
 import com.study.android.videoview.TestDealBitmapActivity;
+import com.study.android.videoview.TestSurfaceViewActivity;
 import com.study.android.videoview.TestVideoViewActivity;
 
 import butterknife.BindView;
@@ -31,7 +32,7 @@ public class MainActivity extends BaseSimpleActivity {
 
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver,
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
-            R.id.test_video_view, R.id.test_deal_bitmap, R.id.test_fragment, R.id.test_thread_updateui})
+            R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment, R.id.test_thread_updateui})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -60,6 +61,9 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_video_view:
                 intent.setClass(this, TestVideoViewActivity.class);
+                break;
+            case R.id.test_surface_view:
+                intent.setClass(this, TestSurfaceViewActivity.class);
                 break;
             case R.id.test_deal_bitmap:
                 intent.setClass(this, TestDealBitmapActivity.class);

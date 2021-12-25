@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.study.android.activity.MainActivity">
+
+    <com.study.android.videoview.AnimationSurfaceView
+        android:id="@+id/animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <SurfaceView
+        android:id="@+id/standard_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:visibility="gone" />
+
+    <TextureView
+        android:id="@+id/standard_texture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:visibility="gone" />
+
+    <VideoView
+        android:id="@+id/standard_videoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0000FF00"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/surface_pic"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_12dp_yellow"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="3dp"
+        android:text="VideoView绘制视频"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/surface_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bg_12dp_yellow"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="3dp"
+        android:text="SurfaceView绘制图片动"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/surface_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="60dp"
+        android:layout_toEndOf="@+id/surface_pic"
+        android:background="@drawable/bg_12dp_yellow"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="3dp"
+        android:text="SurfaceView绘制视频"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/texture_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="60dp"
+        android:layout_toEndOf="@+id/surface_video"
+        android:background="@drawable/bg_12dp_yellow"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="3dp"
+        android:text="TextureView绘制视频"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+</RelativeLayout>

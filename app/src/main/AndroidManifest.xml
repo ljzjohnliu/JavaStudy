@@ -54,8 +54,11 @@
             android:exported="true" />
 
         <activity
+            android:name="com.study.android.videoview.TestSurfaceViewActivity"
+            android:exported="true" />
+
+        <activity
             android:name="com.study.android.videoview.TestVideoViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:exported="true" />
 
         <activity

@@ -11,12 +11,11 @@
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_marginTop="10dp"
         android:text="Hello World!"
-        />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/test_thread_updateui"
@@ -91,6 +90,15 @@
         android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/test_surface_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="学习SurfaceView相关"
+        android:textAllCaps="false" />
+
+    <Button
         android:id="@+id/test_video_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,6 +106,7 @@
         android:layout_marginTop="10dp"
         android:text="学习video view相关"
         android:textAllCaps="false" />
+
 
     <Button
         android:id="@+id/test_deal_bitmap"
