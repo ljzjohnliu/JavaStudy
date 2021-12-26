@@ -1,5 +1,6 @@
 package com.study.android.event;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -62,6 +63,7 @@ public class DecorView extends View {
      * @param event
      * @return
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(TAG, "onTouchEvent =================" + getDispatchSize(event.getAction()));
