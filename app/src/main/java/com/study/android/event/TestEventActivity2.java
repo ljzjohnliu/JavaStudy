@@ -13,7 +13,7 @@ import com.study.android.base.BaseSimpleActivity;
 public class TestEventActivity2 extends BaseSimpleActivity {
     private static final String TAG = "TestEventActivity";
 
-    DecoreView decoreView;
+    DecorView decorView;
     Button button2;
     ViewGroup myLayout;
 
@@ -22,22 +22,32 @@ public class TestEventActivity2 extends BaseSimpleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_event2);
 
-        decoreView = (DecoreView) findViewById(R.id.button1);
+        decorView = (DecorView) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
-        myLayout = (DecoreViewGroup) findViewById(R.id.my_layout);
+        myLayout = (DecorViewGroup) findViewById(R.id.my_layout);
 
         // 1.为ViewGroup布局设置监听事件
         myLayout.setOnClickListener(v -> Log.d(TAG, "点击了ViewGroup"));
 
-        // 2. 为按钮1设置监听事件
-        decoreView.setOnClickListener(v -> Log.d(TAG, "点击了decoreView"));
+        // 2. 为自定义view设置监听事件
+        decorView.setOnClickListener(v -> Log.d(TAG, "点击了decorView"));
+
+        // 3. 为自定义view注册Touch事件监听setOnTouchListener 且 在onTouch()返回false
+        decorView.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d(TAG, "decorView onTouch: 执行了onTouch(), 动作是:" + event.getAction());
+                return false;
+            }
+        });
 
         // 1. 注册Touch事件监听setOnTouchListener 且 在onTouch()返回false
         button2.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d(TAG, "onTouch: 执行了onTouch(), 动作是:" + event.getAction());
+                Log.d(TAG, "button2 onTouch: 执行了onTouch(), 动作是:" + event.getAction());
                 return true;
             }
         });
@@ -49,6 +59,8 @@ public class TestEventActivity2 extends BaseSimpleActivity {
                 Log.d(TAG, "onClick: 执行了onClick()");
             }
         });
+
+//        decorView.getParent().requestDisallowInterceptTouchEvent(true);
 
     }
 
@@ -88,6 +100,7 @@ public class TestEventActivity2 extends BaseSimpleActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.d(TAG, "dispatchTouchEvent: ev.getAction = " + ev.getAction());
         return super.dispatchTouchEvent(ev);
+//        return false;
     }
 
     @Override

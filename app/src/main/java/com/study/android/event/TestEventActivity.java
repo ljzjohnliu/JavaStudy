@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.study.android.R;
 import com.study.android.base.BaseSimpleActivity;
@@ -14,6 +15,7 @@ import com.study.android.base.BaseSimpleActivity;
 public class TestEventActivity extends BaseSimpleActivity {
     private static final String TAG = "TestEventActivity";
 
+    TextView txtView;
     Button button1, button2;
     ViewGroup myLayout;
 
@@ -22,39 +24,59 @@ public class TestEventActivity extends BaseSimpleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_event);
 
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
-        myLayout = (LinearLayout) findViewById(R.id.my_layout);
+        txtView = findViewById(R.id.text_view);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        myLayout = findViewById(R.id.my_layout);
 
         // 1.为ViewGroup布局设置监听事件
         myLayout.setOnClickListener(v -> Log.d(TAG, "点击了ViewGroup"));
 
-        // 2. 为按钮1设置监听事件
-        button1.setOnClickListener(v -> Log.d(TAG, "点击了button1"));
+        txtView.setOnClickListener(v -> Log.d(TAG, "点击了----111----txtView"));
 
-        // 1. 注册Touch事件监听setOnTouchListener 且 在onTouch()返回false
+//        txtView.setOnTouchListener(new View.OnTouchListener() {
+//
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.d(TAG, "onTouch: 执行了onTouch(), 动作是:" + event.getAction());
+////                return true;
+//                return false;
+//            }
+//        });
+
+        button1.setOnClickListener(v -> Log.d(TAG, "点击了----222----button1"));
+
         button2.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d(TAG, "onTouch: 执行了onTouch(), 动作是:" + event.getAction());
-                return true;
+                Log.d(TAG, "button2: 执行了onTouch(), 动作是:" + event.getAction());
+//                return true;
+                return false;
             }
         });
-        // 2. 注册点击事件OnClickListener()
+
         button2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: 执行了onClick()");
+                Log.d(TAG, "button2: 执行了--------onClick()------");
             }
         });
 
+        button2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d(TAG, "button2: 执行了========onLongClick======");
+                return false;
+            }
+        });
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.d(TAG, "dispatchTouchEvent: ev.getAction = " + ev.getAction());
+        txtView.dispatchTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -64,8 +86,13 @@ public class TestEventActivity extends BaseSimpleActivity {
     }
 
     @Override
+    public void onUserLeaveHint() {
+        Log.d(TAG, "onUserLeaveHint: ----------");
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d(TAG, "onUserInteraction: ----------event = " + event);
+        Log.d(TAG, "onTouchEvent: ----------event = " + event);
         return super.onTouchEvent(event);
     }
 }

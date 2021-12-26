@@ -52,7 +52,7 @@ public class MainActivity extends BaseSimpleActivity {
                 intent.setClass(this, TestBroadcastActivity.class);
                 break;
             case R.id.test_event:
-                intent.setClass(this, TestEventActivity.class);
+                intent.setClass(this, TestEventActivity2.class);
                 break;
             case R.id.test_process_comm:
                 intent.setClass(this, ProcessComActivity.class);

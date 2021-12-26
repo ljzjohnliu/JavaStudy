@@ -8,23 +8,23 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-public class DecoreView extends View {
+public class DecorView extends View {
 
-    private static final String TAG = "DecoreView";
+    private static final String TAG = "DecorView";
 
-    public DecoreView(Context context) {
+    public DecorView(Context context) {
         super(context);
     }
 
-    public DecoreView(Context context, @Nullable AttributeSet attrs) {
+    public DecorView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DecoreView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public DecorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public DecoreView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DecorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -49,7 +49,7 @@ public class DecoreView extends View {
     public boolean dispatchTouchEvent(MotionEvent event) {
         Log.d(TAG, "dispatchTouchEvent ----event.getAction = " + event.getAction());
         return super.dispatchTouchEvent(event);
-//        return false;
+//        return true;
     }
 
     /**
@@ -65,7 +65,13 @@ public class DecoreView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(TAG, "onTouchEvent =================" + getDispatchSize(event.getAction()));
+//        getParent().requestDisallowInterceptTouchEvent(true);
         return super.onTouchEvent(event);
-//        return true;
+//        return false;
     }
+
+//    @Override
+//    public void requestDisallowInterceptTouchEvent(boolean is) {
+//
+//    }
 }

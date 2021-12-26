@@ -9,23 +9,23 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-public class DecoreViewGroup extends ViewGroup {
+public class DecorViewGroup extends ViewGroup {
 
-    private static final String TAG = "DecoreViewGroup";
+    private static final String TAG = "DecorViewGroup";
 
-    public DecoreViewGroup(Context context) {
+    public DecorViewGroup(Context context) {
         super(context);
     }
 
-    public DecoreViewGroup(Context context, @Nullable AttributeSet attrs) {
+    public DecorViewGroup(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DecoreViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DecorViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public DecoreViewGroup(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DecorViewGroup(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -74,6 +74,11 @@ public class DecoreViewGroup extends ViewGroup {
         Log.d(TAG, "onInterceptTouchEvent event.getAction = " + event.getAction()/* + ", onInterceptTouchEvent = " + super.onInterceptTouchEvent(event)*/);
         return super.onInterceptTouchEvent(event);
 //        return true;
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            return super.onInterceptTouchEvent(event);
+//        } else {
+//            return true;
+//        }
     }
 
 
@@ -94,6 +99,7 @@ public class DecoreViewGroup extends ViewGroup {
         Log.d(TAG, "dispatchTouchEvent getAction = " + event.getAction());
         return super.dispatchTouchEvent(event);
 //        return false;
+//        return true;
     }
 
     /**
@@ -110,6 +116,6 @@ public class DecoreViewGroup extends ViewGroup {
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(TAG, "onTouchEvent event.getAction = " + event.getAction());
         return super.onTouchEvent(event);
-//        return false;
+//        return true;
     }
 }
