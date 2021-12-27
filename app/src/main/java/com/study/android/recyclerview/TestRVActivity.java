@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TestRecyclerViewActivity extends BaseSimpleActivity {
+public class TestRVActivity extends BaseSimpleActivity {
     private static final String TAG = "TestRecycler";
 
     private Context mContext;

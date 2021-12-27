@@ -17,7 +17,9 @@ import com.study.android.event.TestEventActivity2;
 import com.study.android.handler.HandlerActivity4;
 import com.study.android.handler.SyncBarrierActivity;
 import com.study.android.receiver.TestBroadcastActivity;
-import com.study.android.recyclerview.TestRecyclerViewActivity;
+import com.study.android.recyclerview.DemoListActivity;
+import com.study.android.recyclerview.TestRVActivity;
+import com.study.android.recyclerview2.TestRvActivity;
 import com.study.android.service.TestServiceActivity;
 import com.study.android.testfrag.AttachActivity;
 import com.study.android.videoview.TestDealBitmapActivity;
@@ -36,7 +38,7 @@ public class MainActivity extends BaseSimpleActivity {
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver, R.id.test_event,
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
-            R.id.test_thread_updateui, R.id.test_recycler_view})
+            R.id.test_thread_updateui, R.id.test_recycler_view, R.id.test_recycler_view2})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -79,7 +81,12 @@ public class MainActivity extends BaseSimpleActivity {
                 intent.setClass(this, AttachActivity.class);
                 break;
             case R.id.test_recycler_view:
-                intent.setClass(this, TestRecyclerViewActivity.class);
+//                intent.setClass(this, TestRecyclerViewActivity.class);
+                intent = new Intent(this, DemoListActivity.class);
+                intent.putExtra(DemoListActivity.EXTRA_USE_PRE_CACHE, true);
+                break;
+            case R.id.test_recycler_view2:
+                intent.setClass(this, TestRvActivity.class);
                 break;
         }
         startActivity(intent);

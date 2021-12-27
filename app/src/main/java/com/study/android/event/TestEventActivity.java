@@ -77,8 +77,9 @@ public class TestEventActivity extends BaseSimpleActivity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.d(TAG, "dispatchTouchEvent: ev.getAction = " + ev.getAction());
-        txtView.dispatchTouchEvent(ev);
-        return super.dispatchTouchEvent(ev);
+//        txtView.dispatchTouchEvent(ev);
+//        return super.dispatchTouchEvent(ev);
+        return true;
     }
 
     @Override
