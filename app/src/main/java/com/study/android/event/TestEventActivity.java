@@ -68,7 +68,8 @@ public class TestEventActivity extends BaseSimpleActivity {
             @Override
             public boolean onLongClick(View v) {
                 Log.d(TAG, "button2: 执行了========onLongClick======");
-                return false;
+                /* return true的话就不会有点击事件，return false会继续执行短按事件，不过这个也是要看Rom的，小米9上就不会执行短按事件*/
+                return true;
             }
         });
     }

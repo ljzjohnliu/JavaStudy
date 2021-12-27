@@ -14,11 +14,10 @@ import com.study.android.communicate.ProcessComActivity;
 import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.event.TestEventActivity;
 import com.study.android.event.TestEventActivity2;
-import com.study.android.handler.HandlerActivity;
-import com.study.android.handler.HandlerActivity2;
 import com.study.android.handler.HandlerActivity4;
 import com.study.android.handler.SyncBarrierActivity;
 import com.study.android.receiver.TestBroadcastActivity;
+import com.study.android.recyclerview.TestRecyclerViewActivity;
 import com.study.android.service.TestServiceActivity;
 import com.study.android.testfrag.AttachActivity;
 import com.study.android.videoview.TestDealBitmapActivity;
@@ -36,7 +35,8 @@ public class MainActivity extends BaseSimpleActivity {
 
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver, R.id.test_event,
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
-            R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment, R.id.test_thread_updateui})
+            R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
+            R.id.test_thread_updateui, R.id.test_recycler_view})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -52,7 +52,7 @@ public class MainActivity extends BaseSimpleActivity {
                 intent.setClass(this, TestBroadcastActivity.class);
                 break;
             case R.id.test_event:
-                intent.setClass(this, TestEventActivity2.class);
+                intent.setClass(this, TestEventActivity.class);
                 break;
             case R.id.test_process_comm:
                 intent.setClass(this, ProcessComActivity.class);
@@ -77,6 +77,9 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_fragment:
                 intent.setClass(this, AttachActivity.class);
+                break;
+            case R.id.test_recycler_view:
+                intent.setClass(this, TestRecyclerViewActivity.class);
                 break;
         }
         startActivity(intent);

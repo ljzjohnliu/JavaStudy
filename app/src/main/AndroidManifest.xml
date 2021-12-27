@@ -152,6 +152,11 @@
         <activity android:name=".testfrag.OtherShowActivity" />
         <activity android:name=".testfrag.AttachActivity" />
         <activity android:name=".testfrag.SingleActivity" />
+
+        <activity
+            android:name="com.study.android.recyclerview.TestRecyclerViewActivity"
+            android:exported="true"
+            android:label="学习recyclerview缓存机制" />
     </application>
 
 </manifest>
