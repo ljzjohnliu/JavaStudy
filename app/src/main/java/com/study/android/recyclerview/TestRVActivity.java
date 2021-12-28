@@ -12,6 +12,7 @@ import android.view.View;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -58,7 +59,7 @@ public class TestRVActivity extends BaseSimpleActivity {
         Log.d(TAG, "------onCreate: ");
         initData();
         recyclerAdapter = new RecyclerAdapter(this, list);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));//默认是竖向布局的
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));//默认是竖向布局的
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));//线性管理器，支持横向、纵向、正序、倒序
 //        recyclerView.setLayoutManager(new GridLayoutManager(GridLayoutManager.this, 2));//网格式布局
 

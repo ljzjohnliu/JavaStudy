@@ -7,13 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Created by Xiaoqi.
- * Date:2019-06-17 15:29.
- * Project:RecyclerViewDemo.
- */
 public class RecyclerViewWrapper extends RecyclerView {
-    private  LayoutListener layoutListener;
+    private LayoutListener layoutListener;
 
     public RecyclerViewWrapper(@NonNull Context context) {
         super(context);
