@@ -67,6 +67,8 @@
 
         <service android:name="com.study.android.service.TestService" />
 
+        <service android:name="com.study.android.service.MyIntentService" />
+
         <activity
             android:name="com.study.android.communicate.ProcessComActivity"
             android:exported="true" />

@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.study.android.R;
 import com.study.android.base.BaseSimpleActivity;
 
+import java.util.Random;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -39,7 +41,8 @@ public class TestServiceActivity extends BaseSimpleActivity {
         }
     };
 
-    @OnClick({R.id.start_service, R.id.stop_service, R.id.bind_service, R.id.unbind_service, R.id.start_test_activity})
+    @OnClick({R.id.start_service, R.id.stop_service, R.id.bind_service, R.id.unbind_service,
+            R.id.test_intent_service, R.id.start_test_activity})
     public void onClick(View view) {
         Intent intent = new Intent(this, TestService.class);
         switch (view.getId()) {
@@ -60,6 +63,11 @@ public class TestServiceActivity extends BaseSimpleActivity {
                 } else {
                     Toast.makeText(this, "当前未绑定任何Service!", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.test_intent_service:
+                Intent serIntent = new Intent(this, MyIntentService.class);
+                serIntent.putExtra("costTime", new Random().nextInt(10));
+                startService(serIntent);
                 break;
             case R.id.start_test_activity:
                 startActivity(new Intent(this, TestServiceActivity.class));
