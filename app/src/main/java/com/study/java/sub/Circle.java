@@ -1,8 +1,8 @@
 package com.study.java.sub;
 
-import com.study.java.base.Shap;
+import com.study.java.base.Shape;
 
-public class Circle extends Shap {
+public class Circle extends Shape {
 
     @Override
     public void draw() {
