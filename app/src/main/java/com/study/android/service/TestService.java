@@ -37,7 +37,17 @@ public class TestService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         Log.d(TAG, "onUnbind: ----from = " + intent.getStringExtra("from"));
-        return false;
+        return true;
+    }
+
+    /**
+     * Service中onRebind方法被调用，要符合两个必要条件就行
+     * (1)服务中onUnBind方法返回值为true
+     * (2)服务对象被解绑后没有被销毁，之后再次被绑定。
+     */
+    @Override
+    public void onRebind(Intent intent) {
+        Log.d(TAG, "onRebind: ----intent = " + intent);
     }
 
     @Override

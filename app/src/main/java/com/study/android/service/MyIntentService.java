@@ -16,6 +16,11 @@ import android.util.Log;
  */
 public class MyIntentService extends IntentService {
     private static final String TAG = "MyIntentService";
+
+    /**
+     * 由于构造器的继承关系，因为IntentService实现了一个带参数的构造器，所以MyIntentService无法继承默认的缺省构造器
+     * 但是Android要求四大组建必须要有无参数的构造器
+     */
     public MyIntentService() {
         super("MyIntentService");
     }
