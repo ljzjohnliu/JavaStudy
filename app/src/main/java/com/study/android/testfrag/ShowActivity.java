@@ -65,7 +65,7 @@ public class ShowActivity extends BaseSimpleActivity implements MeFragment.testD
                 hpText.setTextColor(Color.RED);
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
-                    homeFragment.setonIntentDataCallback(intentDataCallback);
+                    homeFragment.setDataCallback(intentDataCallback);
                     transaction.add(R.id.content, homeFragment);
                 } else {
                     transaction.show(homeFragment);

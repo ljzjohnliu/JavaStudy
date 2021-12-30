@@ -1,13 +1,8 @@
 package com.study.java;
 
-import com.study.java.base.Shap;
+import com.study.java.base.Shape;
 import com.study.java.sub.Circle;
 import com.study.java.sub.Square;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Test {
 
@@ -22,7 +17,7 @@ public class Test {
          * 所以父类类型的引用可以调用父类中定义的所有属性和方法，对于只存在与子类中的方法和属性它就望尘莫及了---1。(使用强制类型转换向下转型依然可以访问到的)
          */
         Square square = new Square();
-        Shap circle = new Circle();
+        Shape circle = new Circle();
 
         /**
          * Square重写draw()，并且重载方法draw(int length)与 draw()不是同一个方法，由于父类中没有该方法，向上转型后会丢失该方法，

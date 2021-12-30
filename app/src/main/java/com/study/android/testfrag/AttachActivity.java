@@ -3,6 +3,7 @@ package com.study.android.testfrag;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AttachActivity extends BaseSimpleActivity {
+public class AttachActivity extends BaseSimpleActivity implements FilmFragment.FilmTransformInterface {
 
     private static final String TAG = "AttachActivity";
     private HomeFragment homeFragment;
@@ -75,6 +76,12 @@ public class AttachActivity extends BaseSimpleActivity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "------onResume: ");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "*********************fragment = " + getFragmentManager().findFragmentById(R.id.content));
+            }
+        }, 3000);
     }
 
     @Override
@@ -120,6 +127,8 @@ public class AttachActivity extends BaseSimpleActivity {
                 filmText.setTextColor(Color.RED);
                 if (filmFragment == null) {
                     filmFragment = new FilmFragment();
+                    filmFragment.setFilmInterface(this);
+                    filmFragment.setDataCallback(dataCallback);
                     transaction.add(R.id.content, filmFragment);
                 } else {
                     transaction.attach(filmFragment);
@@ -163,5 +172,28 @@ public class AttachActivity extends BaseSimpleActivity {
         if (meFragment != null) {
             transaction.detach(meFragment);
         }
+    }
+
+    @Override
+    public void tellHomeSomeThings(String msg) {
+        if (homeFragment != null) {
+            homeFragment.receiverThings(msg);
+        }
+    }
+
+    private onDataCallback dataCallback = new onDataCallback() {
+
+        @Override
+        public String getHomeInfo() {
+            Log.d(TAG, "getHomeInfo: homeFragment = " + homeFragment);
+            if (homeFragment != null) {
+                return homeFragment.getHomeInfo();
+            }
+            return null;
+        }
+    };
+
+    public interface onDataCallback {
+        String getHomeInfo();
     }
 }

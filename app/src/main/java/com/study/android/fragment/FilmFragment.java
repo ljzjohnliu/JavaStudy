@@ -3,15 +3,22 @@ package com.study.android.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.study.android.R;
+import com.study.android.testfrag.AttachActivity;
+import com.study.android.testfrag.ShowActivity;
 
 public class FilmFragment extends BaseFragment {
 
     private static final String TAG = "FilmFragment";
+
+    TextView titleView;
+    TextView contentView;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -32,7 +39,19 @@ public class FilmFragment extends BaseFragment {
 
     @Override
     protected void setUpView() {
+        titleView = rootView.findViewById(R.id.title);
+        contentView = rootView.findViewById(R.id.content);
+        titleView.setOnClickListener(v -> {
+            if (filmTransformInterface != null) {
+                filmTransformInterface.tellHomeSomeThings("今天晚上电影《流星花园》");
+            }
+        });
 
+        contentView.setOnClickListener(v -> {
+            if (dataCallback != null) {
+                contentView.setText(dataCallback.getHomeInfo());
+            }
+        });
     }
 
 
@@ -98,5 +117,21 @@ public class FilmFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         Log.d(TAG, "setUserVisibleHint: ----isVisibleToUser = " + isVisibleToUser);
+    }
+
+    private AttachActivity.onDataCallback dataCallback;
+
+    public void setDataCallback(AttachActivity.onDataCallback dataCallback) {
+        this.dataCallback = dataCallback;
+    }
+
+    public void setFilmInterface(FilmTransformInterface filmInterface) {
+        filmTransformInterface = filmInterface;
+    }
+
+    private FilmTransformInterface filmTransformInterface;
+
+    public interface FilmTransformInterface {
+        void tellHomeSomeThings(String msg);
     }
 }

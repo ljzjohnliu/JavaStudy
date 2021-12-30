@@ -3,6 +3,7 @@ package com.study.android.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +15,12 @@ public class HomeFragment extends BaseFragment {
 
     private static final String TAG = "HomeFragment";
 
-    private ShowActivity.onIntentDataCallback intentDataCallback;
+    private ShowActivity.onIntentDataCallback dataCallback;
 
-    public void setonIntentDataCallback(ShowActivity.onIntentDataCallback intentDataCallback) {
-        this.intentDataCallback = intentDataCallback;
+    TextView titleView;
+
+    public void setDataCallback(ShowActivity.onIntentDataCallback dataCallback) {
+        this.dataCallback = dataCallback;
     }
 
     @Override
@@ -34,13 +37,19 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected int setLayoutResourceID() {
-        return R.layout.fragment_connectdevice_layout;
+        return R.layout.fragment_home_layout;
     }
 
     @Override
     protected void setUpView() {
-        if (intentDataCallback != null) {
-            intentDataCallback.onIntentData();
+        Log.d(TAG, "setUpView: intentDataCallback = " + dataCallback);
+        titleView = rootView.findViewById(R.id.title);
+        titleView.setText(msgFromFilm);
+        titleView.setOnClickListener(v -> {
+
+        });
+        if (dataCallback != null) {
+            dataCallback.onIntentData();
         }
     }
 
@@ -108,5 +117,23 @@ public class HomeFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         Log.d(TAG, "setUserVisibleHint: ----isVisibleToUser = " + isVisibleToUser);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "------onSaveInstanceState: outState = " + outState);
+    }
+
+    private String msgFromFilm = "等待电影界面的结果！";
+
+    public void receiverThings(String msg) {
+        Log.d(TAG, "receiverThings: msg = " + msg);
+        msgFromFilm = msg;
+    }
+
+    public String getHomeInfo() {
+        Log.d(TAG, "getHomeInfo: -------------");
+        return "我是来自首页的信息！";
     }
 }

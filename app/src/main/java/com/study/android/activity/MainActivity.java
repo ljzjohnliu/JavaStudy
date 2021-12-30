@@ -22,6 +22,7 @@ import com.study.android.recyclerview.TestRVActivity;
 import com.study.android.recyclerview2.TestRvActivity;
 import com.study.android.service.TestServiceActivity;
 import com.study.android.testfrag.AttachActivity;
+import com.study.android.testfrag.ShowActivity;
 import com.study.android.videoview.TestDealBitmapActivity;
 import com.study.android.videoview.TestSurfaceViewActivity;
 import com.study.android.videoview.TestVideoViewActivity;
