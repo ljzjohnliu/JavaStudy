@@ -154,6 +154,7 @@
         <activity android:name=".testfrag.OtherShowActivity" />
         <activity android:name=".testfrag.AttachActivity" />
         <activity android:name=".testfrag.SingleActivity" />
+        <activity android:name=".testfrag.viewpager2.ViewPager2Activity" />
 
         <activity
             android:name="com.study.android.recyclerview.TestRVActivity"

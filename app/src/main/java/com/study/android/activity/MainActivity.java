@@ -23,6 +23,7 @@ import com.study.android.recyclerview2.TestRvActivity;
 import com.study.android.service.TestServiceActivity;
 import com.study.android.testfrag.AttachActivity;
 import com.study.android.testfrag.ShowActivity;
+import com.study.android.testfrag.viewpager2.ViewPager2Activity;
 import com.study.android.videoview.TestDealBitmapActivity;
 import com.study.android.videoview.TestSurfaceViewActivity;
 import com.study.android.videoview.TestVideoViewActivity;
@@ -39,7 +40,7 @@ public class MainActivity extends BaseSimpleActivity {
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver, R.id.test_event,
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
-            R.id.test_thread_updateui, R.id.test_recycler_view, R.id.test_recycler_view2})
+            R.id.test_view_pager2, R.id.test_thread_updateui, R.id.test_recycler_view, R.id.test_recycler_view2})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -80,6 +81,9 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_fragment:
                 intent.setClass(this, AttachActivity.class);
+                break;
+            case R.id.test_view_pager2:
+                intent.setClass(this, ViewPager2Activity.class);
                 break;
             case R.id.test_recycler_view:
 //                intent.setClass(this, TestRecyclerViewActivity.class);
