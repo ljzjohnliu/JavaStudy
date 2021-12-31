@@ -15,6 +15,10 @@ public class Shape {
         draw();
     }
 
+    public Shape getSome(Object f) {
+        return new Shape();
+    }
+
     public static Object getObj() {
         return "Obj";
     }

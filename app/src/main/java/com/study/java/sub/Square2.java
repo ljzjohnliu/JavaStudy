@@ -1,6 +1,7 @@
 package com.study.java.sub;
 
 import com.study.java.base.Rectangle;
+import com.study.java.base.Shape;
 
 /**
  * java构造函数的继承问题//不能继承
@@ -22,9 +23,11 @@ public class Square2 extends Rectangle {
 
     public static void main(String[] args) {
         Rectangle rectangle = new Rectangle(1);
-        Square2 square2 = new Square2(1);
-        Square3 square3 = new Square3();
+        Shape shape = rectangle.getSome(100);
+        shape.print();
+//        Square2 square2 = new Square2(1);
+//        Square3 square3 = new Square3();
         //尽管Square4没有显式的构造器，但是从其父类中继承了默认的无参数构造器
-        Square4 square4 = new Square4();
+//        Square4 square4 = new Square4();
     }
 }

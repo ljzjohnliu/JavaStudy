@@ -113,11 +113,14 @@ public class AttachActivity extends BaseSimpleActivity implements FilmFragment.F
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideFragments(transaction);
         clearSelection();
+//        Bundle args = new Bundle();
+//        args.putString("EXTRA_MSG", "携带的数据！！！");
         switch (i) {
             case 0:
                 hpText.setTextColor(Color.RED);
                 if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
+                    homeFragment = new HomeFragment("携带的数据");
+//                    homeFragment.setArguments(args);
                     transaction.add(R.id.content, homeFragment);
                 } else {
                     transaction.attach(homeFragment);

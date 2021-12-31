@@ -2,6 +2,7 @@ package com.study.android.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -18,6 +19,25 @@ public class HomeFragment extends BaseFragment {
     private ShowActivity.onIntentDataCallback dataCallback;
 
     TextView titleView;
+    String msg = "默认值";
+
+    public HomeFragment() {
+        Log.d(TAG, "HomeFragment: ----");
+    }
+
+    /**
+     * 为什么Fragment传值需要通过setArguments（）？
+     * setArguments方法必须在fragment创建以后，添加给Activity前完成。千万不要，首先调用了add，然后设置arguments。
+     * 因为如果Fragment意外销毁，最终会通过反射无参构造实例化一个新的Fragment(这也是为什么Fragment必须要有无参构造器的原因)，
+     * 并且给mArguments初始化为原先的值，而原来的Fragment实例的数据都丢失了，并重新进行了初始化
+     * 通过上面的分析，我们可以知道Activity重新创建时，会重新构建它所管理的Fragment，原先的Fragment的字段值将会全部丢失，
+     *
+     * 但是通过Fragment.setArguments(Bundle bundle)方法设置的bundle会保留下来。所以尽量使用Fragment.setArguments(Bundle bundle)方式来传递参数
+     */
+    public HomeFragment(String args) {
+        msg = args;
+        Log.d(TAG, "HomeFragment: ---- msg = " + msg);
+    }
 
     public void setDataCallback(ShowActivity.onIntentDataCallback dataCallback) {
         this.dataCallback = dataCallback;
@@ -32,7 +52,14 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate");
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            msg = bundle.getString("EXTRA_MSG");
+        }
+        Log.e(TAG, "onCreate-------- msg = " + msg);
+//        getChildFragmentManager();
+//        getFragmentManager();
+//        getParentFragmentManager();
     }
 
     @Override
@@ -44,7 +71,7 @@ public class HomeFragment extends BaseFragment {
     protected void setUpView() {
         Log.d(TAG, "setUpView: intentDataCallback = " + dataCallback);
         titleView = rootView.findViewById(R.id.title);
-        titleView.setText(msgFromFilm);
+        titleView.setText(TextUtils.isEmpty(msgFromFilm) ? msg : msgFromFilm);
         titleView.setOnClickListener(v -> {
 
         });
@@ -125,7 +152,7 @@ public class HomeFragment extends BaseFragment {
         Log.d(TAG, "------onSaveInstanceState: outState = " + outState);
     }
 
-    private String msgFromFilm = "等待电影界面的结果！";
+    private String msgFromFilm;
 
     public void receiverThings(String msg) {
         Log.d(TAG, "receiverThings: msg = " + msg);
