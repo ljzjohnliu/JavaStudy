@@ -80,7 +80,7 @@ public class MainActivity extends BaseSimpleActivity {
                 intent.setClass(this, TestDealBitmapActivity.class);
                 break;
             case R.id.test_fragment:
-                intent.setClass(this, AttachActivity.class);
+                intent.setClass(this, com.study.android.testfrag.MainActivity.class);
                 break;
             case R.id.test_view_pager2:
                 intent.setClass(this, ViewPager2Activity.class);

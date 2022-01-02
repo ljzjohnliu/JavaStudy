@@ -1,5 +1,8 @@
 package com.study.android.testfrag.viewpager2;
 
+import static com.study.android.testfrag.viewpager2.TestResultActivity.RESULT_FROM_TEST;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -111,6 +114,21 @@ public class ViewPager2Activity extends BaseSimpleActivity {
         list.add(new MeFragment());
         adapter = new MyFraStatePagerAdapter(this, list);
         mViewPager2.setAdapter(adapter);
+        mViewPager2.setOffscreenPageLimit(1);
         mViewPager2.setCurrentItem(0);  // 初始化显示第一个页面
+    }
+
+    /**
+     * 如果是在fragment里面调用了startActivityForResult()方法，那么在调用startActivityForResult()方法的时候千万要注意，
+     * 如果Fragment中不是使用getActivity().startActivityForResult()，Fragment和Activity都实现了onActivityResult的话，Fragment能准确接受result，但是Activity接收到的
+     * requestCode不正确（OnActivityResult()里面的requestCode一定和你在startActivityForResult(intent, requestCode)里面设置的requestCode不一样）！
+     * 如果使用getActivity().startActivityForResult()，那么Fragment将不会收到onActivityResult回调。
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String backMsg = data.getStringExtra(RESULT_FROM_TEST);
+        Log.i("ViewPager2Ac", "activity的onActivityResult requestCode=" + requestCode
+                + ", resultCode" + resultCode + ", backMsg = " + backMsg);
     }
 }

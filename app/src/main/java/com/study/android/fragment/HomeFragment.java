@@ -1,6 +1,9 @@
 package com.study.android.fragment;
 
+import static com.study.android.testfrag.viewpager2.TestResultActivity.RESULT_FROM_TEST;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.study.android.R;
 import com.study.android.testfrag.ShowActivity;
+import com.study.android.testfrag.viewpager2.TestResultActivity;
 
 public class HomeFragment extends BaseFragment {
 
@@ -18,6 +22,7 @@ public class HomeFragment extends BaseFragment {
 
     private ShowActivity.onIntentDataCallback dataCallback;
 
+    TextView gotoAcTv;
     TextView titleView;
     String msg = "默认值";
 
@@ -71,9 +76,18 @@ public class HomeFragment extends BaseFragment {
     protected void setUpView() {
         Log.d(TAG, "setUpView: intentDataCallback = " + dataCallback);
         titleView = rootView.findViewById(R.id.title);
-        titleView.setText(TextUtils.isEmpty(msgFromFilm) ? msg : msgFromFilm);
-        titleView.setOnClickListener(v -> {
+        gotoAcTv = rootView.findViewById(R.id.goto_other_activity);
 
+        titleView.setText(TextUtils.isEmpty(msgFromFilm) ? msg : msgFromFilm);
+        gotoAcTv.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), TestResultActivity.class);
+            intent.putExtra("from", "HomeFragment");
+            /*以下两种启动方式存在差别
+            * getActivity().startActivityForResult 则从Activity处理完result返回到的Activity的onActivityResult方法，
+            * 如果直接startActivityForResult，从Activity返回结果时候，会先执行到Fragment的onActivityResult方法
+            * 也会执行该Fragment依附的Activity的onActivityResult方法，需注意其requestCode是对应不上的*/
+//            getActivity().startActivityForResult(intent, TestResultActivity.REQUEST_TEST);
+            startActivityForResult(intent, TestResultActivity.REQUEST_TEST);
         });
         if (dataCallback != null) {
             dataCallback.onIntentData();
@@ -150,6 +164,14 @@ public class HomeFragment extends BaseFragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "------onSaveInstanceState: outState = " + outState);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String backMsg = data.getStringExtra(RESULT_FROM_TEST);
+        Log.i(TAG, "activity的onActivityResult requestCode=" + requestCode
+                + ", resultCode" + resultCode + ", backMsg = " + backMsg);
     }
 
     private String msgFromFilm;
