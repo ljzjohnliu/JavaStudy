@@ -9,6 +9,9 @@
         ...
       </GradleProjectSettings>
 
+查看任务栈命令：
+adb shell dumpsys activity activities
+
 
 View事件分发机制
 一、view的onTouchEvent，OnClickListener和OnTouchListener的onTouch方法 三者优先级

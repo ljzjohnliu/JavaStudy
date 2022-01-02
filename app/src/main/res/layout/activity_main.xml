@@ -170,6 +170,15 @@
                 android:layout_marginTop="10dp"
                 android:text="测试RecyclerView缓存机制"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/test_new_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="理解NEW_TASK的FLAG"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

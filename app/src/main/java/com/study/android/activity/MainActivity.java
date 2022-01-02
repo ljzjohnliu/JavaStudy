@@ -16,6 +16,7 @@ import com.study.android.event.TestEventActivity;
 import com.study.android.event.TestEventActivity2;
 import com.study.android.handler.HandlerActivity4;
 import com.study.android.handler.SyncBarrierActivity;
+import com.study.android.newtask.ActivityB;
 import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.recyclerview.DemoListActivity;
 import com.study.android.recyclerview.TestRVActivity;
@@ -40,7 +41,8 @@ public class MainActivity extends BaseSimpleActivity {
     @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver, R.id.test_event,
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
-            R.id.test_view_pager2, R.id.test_thread_updateui, R.id.test_recycler_view, R.id.test_recycler_view2})
+            R.id.test_view_pager2, R.id.test_thread_updateui, R.id.test_recycler_view, R.id.test_recycler_view2,
+            R.id.test_new_task})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -92,6 +94,9 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_recycler_view2:
                 intent.setClass(this, TestRvActivity.class);
+                break;
+            case R.id.test_new_task:
+                intent.setClass(this, ActivityB.class);
                 break;
         }
         startActivity(intent);
@@ -159,6 +164,12 @@ public class MainActivity extends BaseSimpleActivity {
         ButterKnife.bind(this);
         Log.d(TAG, "onCreate: thread id = " + Thread.currentThread().getId());
 //        updateUIWithThread("onCreate", true);
+        new Thread() {
+            @Override
+            public void run() {
+                titleTv.invalidate();
+            }
+        }.start();
     }
 
     @Override
