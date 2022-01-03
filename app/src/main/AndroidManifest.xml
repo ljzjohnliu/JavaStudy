@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.study.android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.study.android.MyApplication"
         android:allowBackup="true"
@@ -172,10 +174,13 @@
 
         <activity
             android:name="com.study.android.newtask.ActivityB"
-            android:launchMode="singleTop"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity
             android:name="com.study.android.newtask.ActivityC"
+            android:exported="true" />
+        <activity
+            android:name="com.study.android.webview.WebViewActivity"
             android:exported="true" />
     </application>
 

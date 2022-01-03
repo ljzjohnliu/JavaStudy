@@ -28,6 +28,7 @@ import com.study.android.testfrag.viewpager2.ViewPager2Activity;
 import com.study.android.videoview.TestDealBitmapActivity;
 import com.study.android.videoview.TestSurfaceViewActivity;
 import com.study.android.videoview.TestVideoViewActivity;
+import com.study.android.webview.WebViewActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +43,7 @@ public class MainActivity extends BaseSimpleActivity {
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
             R.id.test_view_pager2, R.id.test_thread_updateui, R.id.test_recycler_view, R.id.test_recycler_view2,
-            R.id.test_new_task})
+            R.id.test_new_task, R.id.test_webview})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -58,7 +59,7 @@ public class MainActivity extends BaseSimpleActivity {
                 intent.setClass(this, TestBroadcastActivity.class);
                 break;
             case R.id.test_event:
-                intent.setClass(this, TestEventActivity.class);
+                intent.setClass(this, TestEventActivity2.class);
                 break;
             case R.id.test_process_comm:
                 intent.setClass(this, ProcessComActivity.class);
@@ -98,6 +99,10 @@ public class MainActivity extends BaseSimpleActivity {
             case R.id.test_new_task:
                 intent.setClass(this, ActivityB.class);
                 break;
+            case R.id.test_webview:
+//                intent.setClass(this, WebViewActivity.class);
+                WebViewActivity.openWebViewActivity(this, "https://www.baidu.com");
+                return;
         }
         startActivity(intent);
     }

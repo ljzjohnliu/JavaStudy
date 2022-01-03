@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_web_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/title_left"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/icon_back"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_webview_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:maxWidth="250dp"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            tools:text="Title" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/title_right"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right|center_vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!--<WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />-->
+
+    <RelativeLayout
+        android:id="@+id/web_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/no_network_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/no_net_img"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="160dp"
+            android:src="@drawable/no_network_icon" />
+
+        <TextView
+            android:id="@+id/no_net_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/no_net_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="当前网络状态不佳\n请稍后再试"
+            android:textColor="#74747B"
+            android:textSize="14sp" />
+    </RelativeLayout>
+</LinearLayout>
