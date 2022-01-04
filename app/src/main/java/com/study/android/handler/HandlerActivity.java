@@ -2,7 +2,9 @@ package com.study.android.handler;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.os.MessageQueue;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -130,5 +132,31 @@ public class HandlerActivity extends BaseSimpleActivity {
 //            }
 //        };
 //        lShowToastThread.start();
+
+//        for(int i = 0; i < 10; i++) {
+//            Message msg = Message.obtain();
+//            msg.what = 2;
+//            msg.obj = "刷新UI" + i;
+//            mainHandler.sendMessageDelayed(msg);
+//        }
+
+        Message msg1 = Message.obtain();
+        msg1.what = 2;
+        msg1.obj = "刷新UI";
+        mainHandler.sendMessageDelayed(msg1, 0);
+        /* 更多IdleHandler知识请看链接
+        https://blog.csdn.net/jdsjlzx/article/details/110532500
+        IdleHandler 说白了，就是 Handler 机制提供的一种，可以在 Looper 事件循环的过程中，当出现空闲的时候，允许我们执行任务的一种机制。
+        * MessageQueue 是一个基于消息触发时间的优先级队列，所以队列出现空闲存在两种场景。
+        * 1、MessageQueue 为空，没有消息；
+        * 2、MessageQueue 中最近需要处理的消息，是一个延迟消息（when>currentTime），需要滞后执行；
+        * 这两个场景，都会尝试执行 IdleHandler。 */
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+            @Override
+            public boolean queueIdle() {
+                Log.d(TAG, "queueIdle: -------------");
+                return false;
+            }
+        });
     }
 }
