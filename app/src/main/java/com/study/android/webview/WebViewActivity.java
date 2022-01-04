@@ -155,8 +155,6 @@ public class WebViewActivity extends BaseSimpleActivity {
             mWebView.addJavascriptInterface(mJsBridgeObj, "JSAction");
             String ss = "{\"code\": \"A00000\",\"data\": {\"id\": \"hello\"},\"msg\": \"正常\"}";
         }
-        titleBarRightImage.setVisibility(View.INVISIBLE);
-
 
         if (!isShowTitle) {
             titleBar.setVisibility(View.GONE);
@@ -239,7 +237,7 @@ public class WebViewActivity extends BaseSimpleActivity {
         Log.d(TAG, "loadUrl: loadurl = " + loadurl);
         initCookie();
         if (!TextUtils.isEmpty(loadurl)) {
-            mWebView.getSettings().setDefaultTextEncodingName("gbk");
+//            mWebView.getSettings().setDefaultTextEncodingName("gbk");
 //            mWebView.getSettings().setDefaultTextEncodingName("UTF-8");
             mWebView.loadUrl(loadurl);
         }
@@ -449,4 +447,23 @@ public class WebViewActivity extends BaseSimpleActivity {
         return false;
     }
 
+    @OnClick(R.id.call_js_with_params)
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.call_js_no_params:
+                // 无参数调用
+                mWebView.loadUrl("javascript:javacalljs()");
+                break;
+            case R.id.call_js_with_params:
+                // 传递参数调用
+//                mWebView.loadUrl("javascript:javacalljswithargs(" + "'hello world'" + ")");
+                mWebView.evaluateJavascript("javascript:javacalljswithargs(" + "'hello world'" + ")", new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
+                        Log.d(TAG, "onReceiveValue: -----value = " + value);
+                    }
+                });
+                break;
+        }
+    }
 }
