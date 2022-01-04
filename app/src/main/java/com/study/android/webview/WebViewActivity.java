@@ -153,6 +153,7 @@ public class WebViewActivity extends BaseSimpleActivity {
             createJsBridgeObj(mWebView);
             Log.d(TAG, "onCreate: ");
             mWebView.addJavascriptInterface(mJsBridgeObj, "JSAction");
+            String ss = "{\"code\": \"A00000\",\"data\": {\"id\": \"hello\"},\"msg\": \"正常\"}";
         }
         titleBarRightImage.setVisibility(View.INVISIBLE);
 
@@ -238,6 +239,8 @@ public class WebViewActivity extends BaseSimpleActivity {
         Log.d(TAG, "loadUrl: loadurl = " + loadurl);
         initCookie();
         if (!TextUtils.isEmpty(loadurl)) {
+            mWebView.getSettings().setDefaultTextEncodingName("gbk");
+//            mWebView.getSettings().setDefaultTextEncodingName("UTF-8");
             mWebView.loadUrl(loadurl);
         }
     }
@@ -344,7 +347,11 @@ public class WebViewActivity extends BaseSimpleActivity {
                 super.onReceivedSslError(view, handler, error);
             }
 
-
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view,
+                                                              String url) {
+                return null;
+            }
         });
     }
 

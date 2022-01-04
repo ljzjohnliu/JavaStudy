@@ -9,11 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.study.android.R;
+import com.study.android.anr.ANRActivity;
 import com.study.android.base.BaseSimpleActivity;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.event.TestEventActivity;
 import com.study.android.event.TestEventActivity2;
+import com.study.android.handler.HandlerActivity;
 import com.study.android.handler.HandlerActivity4;
 import com.study.android.handler.SyncBarrierActivity;
 import com.study.android.newtask.ActivityB;
@@ -39,10 +41,10 @@ public class MainActivity extends BaseSimpleActivity {
     @BindView(R.id.title_tv)
     TextView titleTv;
 
-    @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver, R.id.test_event,
+    @OnClick({R.id.test_activity_life, R.id.test_service_life, R.id.test_receiver, R.id.test_event, R.id.test_activity_anr,
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
-            R.id.test_view_pager2, R.id.test_thread_updateui, R.id.test_recycler_view, R.id.test_recycler_view2,
+            R.id.test_view_pager2, R.id.test_recycler_view, R.id.test_recycler_view2,
             R.id.test_new_task, R.id.test_webview})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
@@ -58,6 +60,9 @@ public class MainActivity extends BaseSimpleActivity {
             case R.id.test_receiver:
                 intent.setClass(this, TestBroadcastActivity.class);
                 break;
+            case R.id.test_activity_anr:
+                intent.setClass(this, ANRActivity.class);
+                break;
             case R.id.test_event:
                 intent.setClass(this, TestEventActivity2.class);
                 break;
@@ -65,7 +70,7 @@ public class MainActivity extends BaseSimpleActivity {
                 intent.setClass(this, ProcessComActivity.class);
                 break;
             case R.id.test_handler:
-                intent.setClass(this, HandlerActivity4.class);
+                intent.setClass(this, HandlerActivity.class);
                 break;
             case R.id.test_handler_barrier:
                 intent.setClass(this, SyncBarrierActivity.class);
@@ -101,7 +106,8 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_webview:
 //                intent.setClass(this, WebViewActivity.class);
-                WebViewActivity.openWebViewActivity(this, "https://www.baidu.com");
+//                WebViewActivity.openWebViewActivity(this, "https://www.baidu.com");
+                WebViewActivity.openWebViewActivity(this, "file:///android_asset/ljz_test.html");
                 return;
         }
         startActivity(intent);
@@ -139,15 +145,21 @@ public class MainActivity extends BaseSimpleActivity {
          *
          * 实际操作下来并没有成功！
          */
-        titleTv.setText("Hello!!!");
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)titleTv.getLayoutParams();
-        params.topMargin = 20;
-        titleTv.setLayoutParams(params);
+//        titleTv.setText("Hello!!!");
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)titleTv.getLayoutParams();
+//        params.topMargin = 20;
+//        titleTv.setLayoutParams(params);
         new Thread() {
             @Override
             public void run() {
                 titleTv.setText("我在" + msg + "中调用子线程更新UI");
                 Log.d(TAG, "run: thread id = " + Thread.currentThread().getId());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(TAG, "run: ");
+                    }
+                });
                 if (isDelay) {
                     try {
                         // 等待 onResume 执行完，让 viewRootImpl 初始化完成
@@ -194,7 +206,8 @@ public class MainActivity extends BaseSimpleActivity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "------onResume: ");
-        updateUIWithThread("onResume", false);
+        //以下这样写首次进入Activity时候没有问题，如果打开其他界面再返回就会崩溃！！！
+//        updateUIWithThread("onResume", false);
     }
 
     @Override
