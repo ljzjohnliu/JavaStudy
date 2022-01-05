@@ -29,7 +29,7 @@ public class MergeList {
 
         ListNode result = merge(list1Node1, list2Node1);
         while (result != null) {
-            System.out.println(result.value);
+            System.out.println(result.val);
             result = result.next;
         }
     }
@@ -38,7 +38,7 @@ public class MergeList {
         ListNode newHead = new ListNode(0);
         ListNode cur = newHead;
         while (list1 != null && list2 != null) {
-            if (list1.value < list2.value) {
+            if (list1.val < list2.val) {
                 cur.next = list1;
                 list1 = list1.next;
             } else {
