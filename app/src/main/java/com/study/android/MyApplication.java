@@ -8,6 +8,7 @@ import android.util.Log;
 import com.gu.toolargetool.TooLargeTool;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.study.android.utils.Utils;
 
 public class MyApplication extends Application {
     private final static String TAG = "MyApplication";
@@ -26,7 +27,7 @@ public class MyApplication extends Application {
         refWatcher = setupLeakCanary();
         instance = this;
         TooLargeTool.startLogging(this);
-        Log.d(TAG, "MyApplication, onCreate: ---------------");
+        Log.d(TAG, "MyApplication, onCreate: ---------------" + Utils.getPids());
     }
 
     /**

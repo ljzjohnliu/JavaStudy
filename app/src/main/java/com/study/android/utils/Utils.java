@@ -5,6 +5,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Looper;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -28,7 +31,20 @@ public class Utils {
         int threadId2 = android.os.Process.myTid();
 //        return "Print info : myPid = " + myPid + ", myUid = " + myUid + ", mainThreadId = "
 //                + mainThreadId + ", threadId1 = " + threadId1 + ", threadId2 = " + threadId2;
-        return "Print info : 进程id = " + myPid + ", 主线程id = " + mainThreadId + ", 当前线程id = " + threadId1;
+        return "Print info : 进程名 = " + getProcessName() + ", 进程id = " + myPid + ", 主线程id = " + mainThreadId + ", 当前线程id = " + threadId1;
+    }
+
+    public static String getProcessName() {
+        try {
+            File file = new File("/proc/" + android.os.Process.myPid() + "/" + "cmdline");
+            BufferedReader mBufferedReader = new BufferedReader(new FileReader(file));
+            String processName = mBufferedReader.readLine().trim();
+            mBufferedReader.close();
+            return processName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static boolean checkPhoneNumber(String phoneNum) {

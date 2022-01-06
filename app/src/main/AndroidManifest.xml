@@ -182,6 +182,27 @@
         <activity
             android:name="com.study.android.webview.WebViewActivity"
             android:exported="true" />
+        <activity
+            android:name="com.study.android.multiprocess.TestMultiProcessActivity"
+            android:label="测试多进程问题" />
+        <activity
+            android:name="com.study.android.multiprocess.NewProcessActivity"
+            android:label="新进程的Activity"
+            android:process="first.new.process" />
+
+        <service
+            android:name="com.study.android.multiprocess.NewProcessService"
+            android:label="新进程的Service"
+            android:process=":second.new.process" />
+        <!-- Android8.0之后静态广播不能使用！ -->
+        <receiver
+            android:name="com.study.android.multiprocess.NewProcessReceiver"
+            android:label="新进程的Receiver"
+            android:process=":third.new.process">
+            <intent-filter>
+                <action android:name="com.ljz.action.TEST" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import com.study.android.event.TestEventActivity2;
 import com.study.android.handler.HandlerActivity;
 import com.study.android.handler.HandlerActivity4;
 import com.study.android.handler.SyncBarrierActivity;
+import com.study.android.multiprocess.TestMultiProcessActivity;
 import com.study.android.newtask.ActivityB;
 import com.study.android.receiver.TestBroadcastActivity;
 import com.study.android.recyclerview.DemoListActivity;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseSimpleActivity {
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
             R.id.test_view_pager2, R.id.test_recycler_view, R.id.test_recycler_view2,
-            R.id.test_new_task, R.id.test_webview})
+            R.id.test_new_task, R.id.test_webview, R.id.test_more_process})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -109,6 +110,9 @@ public class MainActivity extends BaseSimpleActivity {
 //                WebViewActivity.openWebViewActivity(this, "https://www.baidu.com");
                 WebViewActivity.openWebViewActivity(this, "file:///android_asset/ljz_test.html");
                 return;
+            case R.id.test_more_process:
+                intent.setClass(this, TestMultiProcessActivity.class);
+                break;
         }
         startActivity(intent);
     }
