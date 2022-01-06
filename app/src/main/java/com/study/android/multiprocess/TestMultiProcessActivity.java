@@ -1,5 +1,6 @@
 package com.study.android.multiprocess;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,7 +32,17 @@ public class TestMultiProcessActivity extends BaseSimpleActivity {
                 break;
             case R.id.start_new_process_receiver:
                 Log.d(TAG, "onClick: ");
+                /**
+                 * Android 8.0发送广播写法变了，只写Action是静态注册Receiver是无法收到广播的,需要加入Component参数
+                 * 其中ComponentName（参数1，参数2）
+                 * 参数1指的是你的app的包名，参数2指的是你的自定义广播所在的路径
+                 */
                 intent.setAction("com.ljz.action.TEST");
+                //写法一
+//                ComponentName componentName = new ComponentName("com.study.android","com.study.android.multiprocess.NewProcessReceiver");
+                //写法二
+                ComponentName componentName = new ComponentName(this,"com.study.android.multiprocess.NewProcessReceiver");
+                intent.setComponent(componentName);
                 sendBroadcast(intent);
                 break;
         }

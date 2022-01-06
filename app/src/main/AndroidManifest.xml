@@ -194,7 +194,6 @@
             android:name="com.study.android.multiprocess.NewProcessService"
             android:label="新进程的Service"
             android:process=":second.new.process" />
-        <!-- Android8.0之后静态广播不能使用！ -->
         <receiver
             android:name="com.study.android.multiprocess.NewProcessReceiver"
             android:label="新进程的Receiver"
