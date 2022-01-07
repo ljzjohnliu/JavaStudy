@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.study.android.activity.MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="演示Android中的几种动画"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/anim_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00009900"
+        app:layout_constraintBottom_toTopOf="@+id/opt_layout"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <ImageView
+            android:id="@+id/anim_img1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <ImageView
+            android:id="@+id/anim_img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/anim_img1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/cat" />
+
+        <ImageView
+            android:id="@+id/anim_img3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/anim_img2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/queen" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/opt_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/frame_anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="帧动画" />
+
+        <Button
+            android:id="@+id/tween_anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="补间动画" />
+
+        <Button
+            android:id="@+id/animator_anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="属性动画" />
+
+        <Button
+            android:id="@+id/animator_my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自定义插值器" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

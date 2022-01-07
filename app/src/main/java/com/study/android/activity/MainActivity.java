@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.study.android.R;
+import com.study.android.animation.TestAnimationActivity;
 import com.study.android.anr.ANRActivity;
 import com.study.android.base.BaseSimpleActivity;
 import com.study.android.communicate.ProcessComActivity;
@@ -46,7 +47,7 @@ public class MainActivity extends BaseSimpleActivity {
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
             R.id.test_view_pager2, R.id.test_recycler_view, R.id.test_recycler_view2,
-            R.id.test_new_task, R.id.test_webview, R.id.test_more_process})
+            R.id.test_new_task, R.id.test_webview, R.id.test_more_process, R.id.test_animation})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -113,8 +114,12 @@ public class MainActivity extends BaseSimpleActivity {
             case R.id.test_more_process:
                 intent.setClass(this, TestMultiProcessActivity.class);
                 break;
+            case R.id.test_animation:
+                intent.setClass(this, TestAnimationActivity.class);
+                break;
         }
         startActivity(intent);
+//        finish();
     }
 
     @OnClick({R.id.test_thread_updateui})
@@ -128,12 +133,12 @@ public class MainActivity extends BaseSimpleActivity {
 
     /**
      * 子线程不能更新 UI 的限制是 viewRootImpl.java 内部限制了
-     *
+     * <p>
      * void checkThread() {
      *     // 该方法是 viewRootImpl.java 内部代码
      *     if (mThread != Thread.currentThread()) {
      *         throw new CalledFromWrongThreadException(
-     *                 "Only the original thread that created a view hierarchy can touch its views.");
+     *         "Only the original thread that created a view hierarchy can touch its views.");
      *     }
      * }
      * 对组件 Activity 而言，viewRootImpl 的初始化在 onCreate 之后，onResume 之后。
@@ -236,5 +241,12 @@ public class MainActivity extends BaseSimpleActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "------onDestroy: ");
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Log.d(TAG, "finish: ------------------");
+        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
     }
 }

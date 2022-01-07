@@ -12,4 +12,5 @@
     <color name="color_4b3bf2">#4b3bf2</color>
     <color name="colorLabelYellow">#FFAE20</color>
     <color name="color_fen">#FF7691</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>
