@@ -16,6 +16,37 @@ public class SortTest {
     }
 
     /**
+     * 构建大顶堆
+     */
+    public static void adjustHeap(int[] nums, int i, int len) {
+        int temp, j;
+        temp = nums[i];
+        for (j = 2 * i; j < len; j *= 2) {// 沿关键字较大的孩子结点向下筛选
+            if (j < len && nums[j] < nums[j + 1])
+                ++j; // j为关键字中较大记录的下标
+            if (temp >= nums[j])
+                break;
+            nums[i] = nums[j];
+            i = j;
+        }
+        nums[i] = temp;
+    }
+
+    public static int[] heapSort(int[] nums) {
+        int i;
+        for (i = nums.length / 2 - 1; i >= 0; i--) {// 构建一个大顶堆
+            adjustHeap(nums, i, nums.length - 1);
+        }
+        for (i = nums.length - 1; i >= 0; i--) {// 将堆顶记录和当前未经排序子序列的最后一个记录交换
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+            adjustHeap(nums, 0, i - 1);// 将a中前i-1个记录重新调整为大顶堆
+        }
+        return nums;
+    }
+
+    /**
      * 快速排序2.0版本
      *
      * @param nums
