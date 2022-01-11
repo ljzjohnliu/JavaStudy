@@ -33,8 +33,11 @@ import java.util.List;
 public class ListTest {
 
     public static final int COUNT = 600000;
-    public static final int INSERT_COUNT = 600;
-    public static final int DELETE_COUNT = 6000;
+    public static final int MODIFY_COUNT = 6000;
+    public static final int MODIFY_START = COUNT/2;
+    public static final int INSERT_COUNT = 6000;
+    public static final int DELETE_COUNT = 600;
+    public static final int DELETE_START = COUNT/2;
 
     public static void main(String[] args) {
         /**
@@ -42,19 +45,19 @@ public class ListTest {
          * 理论上数组存储速度是要优于链表的，但是出现扩容情况的话，可能某些情况下打印结果是ArrayList是要比LinkedList更耗时！
          * 不过总的来说ArrayList存储速度是要优于LinkedList的
          */
-        List<String> arrayList = new ArrayList<>();
+        ArrayList<String> arrayList = new ArrayList<>();
         long startTime1 = System.currentTimeMillis();
         for (int i = 0; i < COUNT; i++) {
-            arrayList.add("array " + i);
+            arrayList.add("array" + i);
         }
-        System.out.println("Array list cost time is = " + (System.currentTimeMillis() - startTime1));
+        System.out.println("Add Array list add cost time is = " + (System.currentTimeMillis() - startTime1));
 
         long startTime2 = System.currentTimeMillis();
-        List<String> linkedList = new LinkedList<>();
+        LinkedList<String> linkedList = new LinkedList<>();
         for (int i = 0; i < COUNT; i++) {
-            linkedList.add("array " + i);
+            linkedList.add("linked" + i);
         }
-        System.out.println("linked list cost time is = " + (System.currentTimeMillis() - startTime2));
+        System.out.println("Add linked list cost time is = " + (System.currentTimeMillis() - startTime2));
 
         /**
          * 采用下标遍历的话，ArrayList和LinkedList的性能差别会很大
@@ -75,32 +78,49 @@ public class ListTest {
         /**
          * 修改元素是否LinkedList优于ArrayList的话 一定是index偏前！
          */
-        long insertStartTime1 = System.currentTimeMillis();
-        for (int i = 0; i < INSERT_COUNT; i++) {
-            arrayList.set(COUNT / 2, "array " + i);
-        }
-        System.out.println("Insert Array list cost time is = " + (System.currentTimeMillis() - insertStartTime1));
-
-        long insertStartTime2 = System.currentTimeMillis();
-        for (int i = 0; i < INSERT_COUNT; i++) {
-            linkedList.set(COUNT / 2, "array " + i);
-        }
-        System.out.println("Insert Linked list cost time is = " + (System.currentTimeMillis() - insertStartTime2));
+//        long insertStartTime1 = System.currentTimeMillis();
+//        for (int i = MODIFY_START; i < MODIFY_START + MODIFY_COUNT; i++) {
+//            arrayList.set(i, "array" + i);
+//        }
+//        System.out.println("Modify Array list cost time is = " + (System.currentTimeMillis() - insertStartTime1));
+//
+//        long insertStartTime2 = System.currentTimeMillis();
+//        for (int i = MODIFY_START; i < MODIFY_START + MODIFY_COUNT; i++) {
+//            linkedList.set(i, "linked" + i);
+//        }
+//        System.out.println("Modify Linked list cost time is = " + (System.currentTimeMillis() - insertStartTime2));
 
         /**
          * 删除元素是否LinkedList优于ArrayList的话 一定是index偏前！
+         * 注意一点如果测试code采用了下标方式访问元素 那么将不能真正体现两者优劣，因为LinkedList的随机访问就是很慢
          */
-        long delStartTime1 = System.currentTimeMillis();
-        for (int i = 500000; i < 500000 + DELETE_COUNT; i++) {
-            arrayList.remove(i);
+        ArrayList<String> delList1 = new ArrayList<>();
+        for (int i = DELETE_START; i < DELETE_START + DELETE_COUNT; i++) {
+            delList1.add("array" + i);
         }
+        LinkedList<String> delList2 = new LinkedList<>();
+        for (int i = DELETE_START; i < DELETE_START + DELETE_COUNT; i++) {
+            delList2.add("linked" + i);
+        }
+        System.out.println(" del list array size is : " + delList1.size() + ", linked size = " + delList2.size());
+        long delStartTime1 = System.currentTimeMillis();
+        arrayList.removeAll(delList1);
         System.out.println("Delete Array list cost time is = " + (System.currentTimeMillis() - delStartTime1));
 
         long delStartTime2 = System.currentTimeMillis();
-        for (int i = 500000; i < 500000 + DELETE_COUNT; i++) {
-            linkedList.remove(i);
-        }
+        linkedList.removeAll(delList2);
         System.out.println("Delete Linked list cost time is = " + (System.currentTimeMillis() - delStartTime2));
+//        long delStartTime1 = System.currentTimeMillis();
+//        for (int i = DELETE_START; i < DELETE_START + DELETE_COUNT; i++) {
+//            arrayList.remove("array" + i);
+//        }
+//        System.out.println("Delete Array list cost time is = " + (System.currentTimeMillis() - delStartTime1));
+//
+//        long delStartTime2 = System.currentTimeMillis();
+//        for (int i = DELETE_START; i < DELETE_START + DELETE_COUNT; i++) {
+//            linkedList.remove("linked" + i);
+//        }
+//        System.out.println("Delete Linked list cost time is = " + (System.currentTimeMillis() - delStartTime2));
 
 //        testArrayList();
 //        testLinkedList();
