@@ -2,10 +2,75 @@ package com.study.java.leecode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class TreeTest {
     public static void main(String[] args) {
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node1 = new TreeNode(1);
+        node1.left = node2;
 
+        ArrayList<ArrayList<Integer>> lists = levelOrder2(node1);
+        System.out.println("lists size is " + lists.size());
+        for (int i = 0; i < lists.size(); i++) {
+            System.out.println("list " + i + " size is " + lists.get(i).size());
+            for (int j = 0; j < lists.get(i).size(); j++) {
+                System.out.print(lists.get(i).get(j) + "  ");
+            }
+        }
+    }
+
+    /**
+     * 二叉树的层序遍历
+     * 引申题目可以求最大节点的层个数，以及层深度
+     */
+    public static ArrayList<ArrayList<Integer>> levelOrder2(TreeNode root) {
+        ArrayList<ArrayList<Integer>> allList = new ArrayList<>();
+        if (root == null) {
+            return allList;
+        }
+        ArrayList<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        TreeNode curEnd = root;
+        TreeNode nextEnd = null;
+        int curLevel = 0;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            list.add(node.val);
+            if (node.left != null) {
+                queue.add(node.left);
+                nextEnd = node.left;
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+                nextEnd = node.right;
+            }
+            if (node == curEnd) {
+                allList.add(curLevel, list);
+                list = new ArrayList<>();
+                curLevel++;
+                curEnd = nextEnd;
+            }
+        }
+        return allList;
+    }
+
+    public ArrayList<Integer> levelOrder1(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            list.add(node.val);
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+        return list;
     }
 
     static int pre0 = -1;
