@@ -1,4 +1,4 @@
-package com.study.java.leecode;
+package com.study.java.leecode.list;
 
 /**
  * 判断链表中是否有环

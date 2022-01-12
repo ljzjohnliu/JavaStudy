@@ -1,4 +1,4 @@
-package com.study.java.leecode;
+package com.study.java.leecode.list;
 
 public class ListNode {
     public int val;

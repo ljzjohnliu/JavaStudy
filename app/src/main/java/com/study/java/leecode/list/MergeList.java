@@ -1,4 +1,4 @@
-package com.study.java.leecode;
+package com.study.java.leecode.list;
 
 /**
  * 题目描述
