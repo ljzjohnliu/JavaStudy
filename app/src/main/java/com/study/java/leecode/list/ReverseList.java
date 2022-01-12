@@ -17,13 +17,20 @@ import java.util.Stack;
  */
 public class ReverseList {
     public static void main(String[] args) {
-        ListNode listNode4 = new ListNode(4, null);
+        ListNode listNode5 = new ListNode(5, null);
+        ListNode listNode4 = new ListNode(4, listNode5);
         ListNode listNode3 = new ListNode(3, listNode4);
         ListNode listNode2 = new ListNode(2, listNode3);
         ListNode listNode1 = new ListNode(1, listNode2);
-        ListNode newNode = reverseList2(listNode1);
+//        ListNode newNode = reverseList3(listNode1);
+//        while (newNode != null) {
+//            System.out.println(newNode.val);
+//            newNode = newNode.next;
+//        }
+        ListNode newNode = reverseKGroup(listNode1, 3);
+        System.out.println();
         while (newNode != null) {
-            System.out.println(newNode.val);
+            System.out.print(newNode.val + " ");
             newNode = newNode.next;
         }
     }
@@ -85,5 +92,81 @@ public class ReverseList {
             curNode = tempNode;
         }
         return newHead;
+    }
+
+    /**
+     * 链表中的节点每k个一组翻转
+     * 描述
+     * 将给出的链表中的节点每 k 个一组翻转，返回翻转后的链表
+     * 如果链表中的节点数不是 k 的倍数，将最后剩下的节点保持原样
+     * 你不能更改节点中的值，只能更改节点本身。
+     *
+     * 数据范围：0≤n≤2000，1≤k≤2000 ，链表中每个元素都满足0≤val≤1000
+     * 要求空间复杂度 O(1)，时间复杂度 O(n)
+     * 例如：
+     * 给定的链表是 1->2->3->4->5
+     * 对于 k = 2, 你应该返回 2→1→4→3→5
+     * 对于 k = 3, 你应该返回 3→2→1→4→5
+     *
+     * 示例1
+     * 输入：{1,2,3,4,5},2
+     * 返回值：{2,1,4,3,5}
+     * 示例2
+     * 输入：{},1
+     * 返回值：{}
+     */
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        int length = getListLength(head);
+        if (k <= 1 || k > length) {
+            return head;
+        }
+
+        int count = length / k;//有count段需要反转
+        ListNode resNode = new ListNode(-1);//返回值
+        ListNode cur = head, res_cur = resNode;
+        ListNode tar = null;//用于保存现场
+        //每遍历k个节点都要：保存现场、反转、拼到结果链表上、恢复现场。
+        for (int i = 0; i < count; i++) {
+            int n = 1;
+            ListNode tem = cur;//记录反转部分的头节点，方便反转操作
+            while (n < k) {//遍历k个节点来反转
+                cur = cur.next;
+                n += 1;
+            }
+
+            tar = cur.next;//保存现场，最后一趟反转后，tar指向的是不用反转的链表段的头节点，或null
+            cur.next = null;//断链
+            res_cur.next = ReverseList(tem);//反转，并拼到结果链表上
+            while (res_cur.next != null) res_cur = res_cur.next;//结果链表的遍历指针总是要指向链尾
+            cur = tar;//恢复现场
+        }
+        res_cur.next = tar;//接上剩下几个不用反转的节点
+        return resNode.next;
+    }
+
+    public static int getListLength(ListNode head) {
+        int length = 0;
+        while (head != null) {
+            length++;
+            head = head.next;
+        }
+        return length;
+    }
+
+    /**
+     * 反转链表
+     */
+    public static ListNode ReverseList(ListNode head) {
+        ListNode pre = null, cur = head;
+        while (cur != null) {
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
     }
 }
