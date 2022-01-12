@@ -96,6 +96,18 @@ public class SystemUIUtils {
         }
     }
 
+    public static float[] getScreenDensities( Context context) {
+        float[] densities = new float[3];
+        WindowManager wm = (WindowManager)context
+                .getSystemService(Context.WINDOW_SERVICE) ;
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        densities[0] = outMetrics.density;
+        densities[1] = outMetrics.densityDpi;
+        densities[2] = outMetrics.scaledDensity;
+        return densities;
+    }
+
     public static int getScreenWidth( Context context) {
         WindowManager wm = (WindowManager)context
                 .getSystemService(Context.WINDOW_SERVICE) ;
@@ -111,6 +123,4 @@ public class SystemUIUtils {
         wm.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.heightPixels;
     }
-
-
 }

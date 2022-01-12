@@ -12,6 +12,7 @@ import com.study.android.R;
 import com.study.android.animation.TestAnimationActivity;
 import com.study.android.anr.ANRActivity;
 import com.study.android.base.BaseSimpleActivity;
+import com.study.android.bitmap.TestBitmapActivity;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.event.TestEventActivity;
@@ -47,7 +48,8 @@ public class MainActivity extends BaseSimpleActivity {
             R.id.test_process_comm, R.id.test_handler_barrier, R.id.test_handler, R.id.test_custom_view,
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
             R.id.test_view_pager2, R.id.test_recycler_view, R.id.test_recycler_view2,
-            R.id.test_new_task, R.id.test_webview, R.id.test_more_process, R.id.test_animation})
+            R.id.test_new_task, R.id.test_webview, R.id.test_more_process, R.id.test_animation,
+            R.id.test_bitmap})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -116,6 +118,9 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_animation:
                 intent.setClass(this, TestAnimationActivity.class);
+                break;
+            case R.id.test_bitmap:
+                intent.setClass(this, TestBitmapActivity.class);
                 break;
         }
         startActivity(intent);

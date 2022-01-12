@@ -197,6 +197,10 @@
             android:name="com.study.android.animation.TweenAnimationActivity"
             android:label="演示补间动画Activity" />
 
+        <activity
+            android:name="com.study.android.bitmap.TestBitmapActivity"
+            android:label="Bitmap相关的Activity" />
+
         <service
             android:name="com.study.android.multiprocess.NewProcessService"
             android:label="新进程的Service"

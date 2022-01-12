@@ -134,7 +134,6 @@
                 android:text="学习video view相关"
                 android:textAllCaps="false" />
 
-
             <Button
                 android:id="@+id/test_deal_bitmap"
                 android:layout_width="wrap_content"
@@ -214,6 +213,15 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="测试动画"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/test_bitmap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Bitmap相关处理"
                 android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
