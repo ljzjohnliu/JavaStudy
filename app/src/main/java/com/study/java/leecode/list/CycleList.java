@@ -76,4 +76,32 @@ public class CycleList {
         }
         return startNode;
     }
+
+    /**
+     * 获取第一个入环节点
+     */
+    public ListNode detectCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+        ListNode slowNode = head.next;
+        ListNode fastNode = head.next.next;
+        while (fastNode != null && fastNode.next != null) {
+            if (slowNode == fastNode) {
+                break;
+            }
+            slowNode = slowNode.next;
+            fastNode = fastNode.next.next;
+        }
+        if (fastNode == null || fastNode.next == null) {
+            return null;
+        } else {
+            fastNode = head;
+        }
+        while (fastNode != slowNode) {
+            fastNode = fastNode.next;
+            slowNode = slowNode.next;
+        }
+        return slowNode;
+    }
 }
