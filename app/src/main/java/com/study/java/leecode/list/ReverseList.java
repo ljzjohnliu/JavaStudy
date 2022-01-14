@@ -17,22 +17,33 @@ import java.util.Stack;
  */
 public class ReverseList {
     public static void main(String[] args) {
-        ListNode listNode5 = new ListNode(5, null);
-        ListNode listNode4 = new ListNode(4, listNode5);
-        ListNode listNode3 = new ListNode(3, listNode4);
-        ListNode listNode2 = new ListNode(2, listNode3);
-        ListNode listNode1 = new ListNode(1, listNode2);
-//        ListNode newNode = reverseList3(listNode1);
+//        ListNode listNode5 = new ListNode(5, null);
+//        ListNode listNode4 = new ListNode(4, listNode5);
+//        ListNode listNode3 = new ListNode(3, listNode4);
+//        ListNode listNode2 = new ListNode(2, listNode3);
+//        ListNode listNode1 = new ListNode(1, listNode2);
+
+        ListNode listNode3 = new ListNode(2, null);
+        ListNode listNode2 = new ListNode(4, listNode3);
+        ListNode listNode1 = new ListNode(5, listNode2);
+//        ListNode newNode = reverseList2(listNode1);
 //        while (newNode != null) {
 //            System.out.println(newNode.val);
 //            newNode = newNode.next;
 //        }
-        ListNode newNode = reverseKGroup(listNode1, 3);
-        System.out.println();
+
+        ListNode newNode = reverseBetween(listNode1, 3, 3);
         while (newNode != null) {
-            System.out.print(newNode.val + " ");
+            System.out.println(newNode.val);
             newNode = newNode.next;
         }
+
+//        ListNode newNode = reverseKGroup2(listNode1, 2);
+//        System.out.println();
+//        while (newNode != null) {
+//            System.out.print(newNode.val + " ");
+//            newNode = newNode.next;
+//        }
     }
 
     /**
@@ -40,7 +51,6 @@ public class ReverseList {
      * 然后通过递归通过栈的特性，这里就是让它可以从最后一个节点开始把自己的子节点的子节点改成自己
      * 自己的子节点改为null
      */
-    // 1 2 3  ---> 3 2 1
     public static ListNode reverseList1(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -51,7 +61,9 @@ public class ReverseList {
         return newNode;
     }
 
-    // 1 2 3 4  --->4 3 2 1
+    /**
+     * 使用栈实现反转
+     */
     public static ListNode reverseList2(ListNode node) {
         Stack<ListNode> nodeStack = new Stack<>();
         ListNode head = null;
@@ -65,8 +77,6 @@ public class ReverseList {
         if ((!nodeStack.isEmpty())) {
             head = nodeStack.pop();
         }
-        System.out.println(head.val);
-        System.out.println(head.next);
 
         //排除以后就可以快乐的循环
         while (!nodeStack.isEmpty()) {
@@ -77,7 +87,9 @@ public class ReverseList {
         return head;
     }
 
-    // 1 2 3  ---> 3 2 1
+    /**
+     * 第三种写法，如果需要不改变原链表 则用一个哨兵节点遍历 否则可在原链表操作
+     */
     public static ListNode reverseList3(ListNode head) {
         ListNode newHead = null;
         ListNode curNode = head;
@@ -92,6 +104,53 @@ public class ReverseList {
             curNode = tempNode;
         }
         return newHead;
+    }
+
+    /**
+     * 给你单链表的头指针 head 和两个整数left 和 right ，其中left <= right。
+     * 请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
+     */
+    public static ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode curNode = head;
+        ListNode before = left == 1 ? null : head;
+        ListNode beforeEnd = left == 1 ? null : head;
+        ListNode after = head;
+        ListNode start = head;
+        int count = 1;
+        while (curNode != null) {
+            if (count == left - 1) {
+                beforeEnd = curNode;
+            }
+            if (count == left) {
+                start = curNode;
+            }
+            if (count == right) {
+                after = curNode.next;
+                curNode.next = null;
+            }
+            count++;
+            curNode = curNode.next;
+        }
+
+        ListNode reverseNode = after;
+        if (start.next == null) {
+            reverseNode = start;
+            reverseNode.next = after;
+        } else {
+            while (start != null) {
+                ListNode temp = start.next;
+                start.next = reverseNode;
+                reverseNode = start;
+                start = temp;
+            }
+        }
+        if (beforeEnd != null) {
+            beforeEnd.next = reverseNode;
+        }
+        return before == null ? reverseNode : before;
     }
 
     /**
@@ -115,6 +174,51 @@ public class ReverseList {
      * 输入：{},1
      * 返回值：{}
      */
+
+    public static ListNode reverseKGroup2(ListNode head, int k) {
+        if (head == null || head.next == null || k <= 1) {
+            return head;
+        }
+        int length = getListLength(head);
+        int need = length / k;
+        ListNode resNode = new ListNode(-1);
+        ListNode cur = head, res_cur = resNode;
+        ListNode tar = null;
+        for (int i = 0; i < need; i++) {
+            int n = 1;
+            ListNode temp = cur;//反转部分头节点
+            while (n < k) {
+                cur = cur.next;
+                n++;
+            }
+
+            tar = cur.next;
+            cur.next = null;
+            res_cur.next = reverseList(temp);
+
+            while (res_cur.next != null) {
+                res_cur = res_cur.next;
+            }
+            cur = tar;
+        }
+        res_cur.next = tar;
+        return resNode.next;
+    }
+
+    /**
+     * 反转链表
+     */
+    public static ListNode reverseList(ListNode head) {
+        ListNode pre = null, cur = head;
+        while (cur != null) {
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
+    }
+
     public static ListNode reverseKGroup(ListNode head, int k) {
         if (head == null || head.next == null) {
             return head;
@@ -139,7 +243,7 @@ public class ReverseList {
 
             tar = cur.next;//保存现场，最后一趟反转后，tar指向的是不用反转的链表段的头节点，或null
             cur.next = null;//断链
-            res_cur.next = ReverseList(tem);//反转，并拼到结果链表上
+            res_cur.next = reverseList(tem);//反转，并拼到结果链表上
             while (res_cur.next != null) res_cur = res_cur.next;//结果链表的遍历指针总是要指向链尾
             cur = tar;//恢复现场
         }
@@ -154,19 +258,5 @@ public class ReverseList {
             head = head.next;
         }
         return length;
-    }
-
-    /**
-     * 反转链表
-     */
-    public static ListNode ReverseList(ListNode head) {
-        ListNode pre = null, cur = head;
-        while (cur != null) {
-            ListNode temp = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = temp;
-        }
-        return pre;
     }
 }
