@@ -1,8 +1,6 @@
 package com.study.java.leecode.list;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * 单链表的排序
@@ -28,13 +26,56 @@ public class SortList {
         ListNode list1Node1 = new ListNode(1, list1Node2);
 
         ListNode result = sortInList(list1Node1);
-//        while (result != null) {
-//            System.out.print(result.val + "  ");
-//            result = result.next;
-//        }
+        while (result != null) {
+            System.out.print(result.val + "  ");
+            result = result.next;
+        }
     }
 
+    /**
+     * 使用归并排链表
+     */
     public static ListNode sortInList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+
+        //快慢指针这里需要注意定制化
+        ListNode slowNode = head;
+        ListNode fastNode = head.next;
+        while (fastNode != null && fastNode.next != null) {
+            slowNode = slowNode.next;
+            fastNode = fastNode.next.next;
+        }
+        //找到slowNode即中间节点
+        ListNode temp = slowNode.next;
+        slowNode.next = null;
+        ListNode left = sortInList(head);
+        ListNode right = sortInList(temp);
+        return mergeList(left, right);
+    }
+
+    public static ListNode mergeList(ListNode left, ListNode right) {
+        ListNode resNode = new ListNode(0);
+        while (left != null && right != null) {
+            if (left.val <= right.val) {
+                resNode.next = new ListNode(left.val);
+                left = left.next;
+            } else {
+                resNode.next = new ListNode(right.val);
+                right = right.next;
+            }
+            resNode = resNode.next;
+        }
+        if (left != null) {
+            resNode.next = left;
+        }
+        if (right != null) {
+            resNode.next = right;
+        }
+        return resNode.next;
+    }
+
+    public static ListNode sortInList1(ListNode head) {
         ArrayList<Integer> list = new ArrayList<>();
         while (head != null) {
             list.add(head.val);

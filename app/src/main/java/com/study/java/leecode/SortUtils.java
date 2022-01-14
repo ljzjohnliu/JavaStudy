@@ -1,10 +1,25 @@
 package com.study.java.leecode;
 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 public class SortUtils {
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
+//        int[] result = sort(nums);
+        heapSort(nums);
+        System.out.println(Arrays.toString(nums));
+    }
+
+
     public static int[] sort(int[] nums) {
         return sortByMerge(nums, 0, nums.length - 1);
     }
 
+    /**
+     * 归并排序 时间复杂度O（nlogn）
+     */
     public static int[] sortByMerge(int[] nums, int start, int end) {
         if (start == end) {
             return new int[]{nums[start]};
@@ -36,5 +51,19 @@ public class SortUtils {
             resArr[p++] = rightArr[pR++];
         }
         return resArr;
+    }
+
+    /**
+     * 堆排序
+     */
+    public static void heapSort(int[] nums) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for (int i : nums) {
+            heap.add(i);
+        }
+        for (int i = 0; !heap.isEmpty(); i++) {
+            nums[i] = heap.poll();
+        }
+        System.out.println(Arrays.toString(nums));
     }
 }
