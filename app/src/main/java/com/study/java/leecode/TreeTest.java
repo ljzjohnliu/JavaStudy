@@ -1,8 +1,11 @@
 package com.study.java.leecode;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class TreeTest {
     public static void main(String[] args) {
@@ -19,6 +22,125 @@ public class TreeTest {
             }
         }
     }
+
+    /**
+     * 深度优先搜索
+     */
+    public static List<Integer> rightSideView2(TreeNode root) {
+        res.clear();
+        dfs(root, 0);
+        return res;
+    }
+
+    static List<Integer> res = new ArrayList<>();
+    public static void dfs(TreeNode root, int depth) {
+        if (root == null)
+            return;
+        if (depth == res.size()) {
+            res.add(root.val);
+        }
+        depth++;
+        dfs(root.right, depth);
+        dfs(root.left, depth);
+    }
+
+    /**
+     * 二叉树的右视图
+     * 广度优先搜索 也就是层序遍历每一层最后元素
+     */
+    public static List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null)
+            return list;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        TreeNode curEnd = root;
+        TreeNode nextEnd = null;
+        while (!queue.isEmpty()) {
+            //当前队列只能存在一层的节点，所以这个size也就是当前层的节点个数！这个很有用！！
+            int size = queue.size();
+            TreeNode node = queue.poll();
+            if (node.left != null) {
+                queue.add(node.left);
+                nextEnd = node.left;
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+                nextEnd = node.right;
+            }
+            if (curEnd == node) {
+                list.add(node.val);
+                curEnd = nextEnd;
+            }
+        }
+        return list;
+    }
+
+    public static ArrayList<ArrayList<Integer>> getLevelLists(TreeNode root) {
+        ArrayList<ArrayList<Integer>> lists = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        int curLevel = 0;
+        TreeNode curEnd = root;
+        TreeNode nextEnd = null;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            list.add(node.val);
+            if (node.left != null) {
+                queue.add(node.left);
+                nextEnd = node.left;
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+                nextEnd = node.right;
+            }
+            if (curEnd == node) {
+                lists.add(curLevel++, list);
+                list = new ArrayList<>();
+                curEnd = nextEnd;
+            }
+        }
+        return lists;
+    }
+
+    /**
+     * 使用栈实现
+     */
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Deque<TreeNode> stk = new LinkedList<TreeNode>();
+//        Stack<TreeNode> stk = new Stack<>();
+        while (root != null || !stk.isEmpty()) {
+            while (root != null) {
+                stk.push(root);
+                root = root.left;
+            }
+            root = stk.pop();
+            list.add(root.val);
+            root = root.right;
+        }
+        return list;
+    }
+
+
+    /**
+     * 递归中序遍历
+     */
+    public static List<Integer> inorderTraversal1(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        inorderTraversalInner(root, list);
+        return list;
+    }
+
+    public static void inorderTraversalInner(TreeNode root,  List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        inorderTraversalInner(root.left, list);
+        list.add(root.val);
+        inorderTraversalInner(root.right, list);
+    }
+
 
     /**
      * 二叉树的层序遍历
