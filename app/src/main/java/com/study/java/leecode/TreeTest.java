@@ -1,6 +1,9 @@
 package com.study.java.leecode;
 
+import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,18 +12,72 @@ import java.util.Stack;
 
 public class TreeTest {
     public static void main(String[] args) {
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node1 = new TreeNode(1);
+        TreeNode node5 = new TreeNode(7);
+        TreeNode node4 = new TreeNode(15);
+        TreeNode node3 = new TreeNode(20);
+        TreeNode node2 = new TreeNode(9);
+        TreeNode node1 = new TreeNode(3);
         node1.left = node2;
+        node1.right = node3;
+        node3.left = node4;
+        node3.right = node5;
 
-        ArrayList<ArrayList<Integer>> lists = levelOrder2(node1);
-        System.out.println("lists size is " + lists.size());
+//        ArrayList<ArrayList<Integer>> lists = levelOrder2(node1);
+        List<List<Integer>> lists = zigzagLevelOrder(node1);
         for (int i = 0; i < lists.size(); i++) {
-            System.out.println("list " + i + " size is " + lists.get(i).size());
+            System.out.println();
             for (int j = 0; j < lists.get(i).size(); j++) {
                 System.out.print(lists.get(i).get(j) + "  ");
             }
         }
+
+//        List<Integer> list = new ArrayList<>();
+        List<Integer> list = Arrays.asList(new Integer[2]);
+        list.set(1, 12);
+    }
+
+    /**
+     * 二叉树的锯齿形层序遍历
+     * 给你二叉树的根节点 root ，返回其节点值的 锯齿形层序遍历 。
+     * （即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+     *
+     * 解法：在原来层序遍历基础上改进下。内层list采用LinkedList 不同层分别从头尾add元素
+     */
+    public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> lists = new ArrayList<>();
+        if (root == null) {
+            return lists;
+        }
+        LinkedList<Integer> list = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int curLevel = 0;
+        TreeNode tempNode;
+        int levelCount;
+        while (!queue.isEmpty()) {
+            levelCount = queue.size();
+            while (levelCount > 0) {
+                tempNode = queue.poll();
+                levelCount--;
+                if (curLevel % 2 == 1) {
+                    list.addFirst(tempNode.val);
+                } else {
+                    list.addLast(tempNode.val);
+                }
+
+                if (tempNode.left != null) {
+                    queue.add(tempNode.left);
+                }
+                if (tempNode.right != null) {
+                    queue.add(tempNode.right);
+                }
+                if (levelCount == 0) {
+                    lists.add(curLevel++, list);
+                    list = new LinkedList<>();
+                }
+            }
+        }
+        return lists;
     }
 
     /**
