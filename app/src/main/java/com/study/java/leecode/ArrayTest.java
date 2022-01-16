@@ -6,8 +6,12 @@ import java.util.Stack;
 public class ArrayTest {
 
     public static void main(String[] args) {
-        int[] nums = new int[]{-1, 0, 3, 5, 9, 12};
-        int result = search(nums, 9, 0, nums.length - 1);
+//        int[] nums = new int[]{-1, 0, 3, 5, 9, 12};
+//        int result = search(nums, 9, 0, nums.length - 1);
+//        System.out.println(result);
+
+        int[] nums = new int[]{10,9,2,5,3,7,101,18};
+        int result = lengthOfLIS(nums);
         System.out.println(result);
     }
 
