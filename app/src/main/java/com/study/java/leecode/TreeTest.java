@@ -37,6 +37,44 @@ public class TreeTest {
     }
 
     /**
+     * 求最近公共祖先问题
+     * 递归思想，分别判断p，q在左右子树中最近公共祖先，然后汇总
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null)
+            return null;
+        if (p == root || q == root)
+            return root;
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        } else if (left != null) {
+            return left;
+        } else {
+            return right;
+        }
+    }
+
+    private TreeNode ans;
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        this.ans = null;
+        this.dfs(root, p, q);
+        return this.ans;
+    }
+
+    private boolean dfs(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return false;
+        boolean lson = dfs(root.left, p, q);
+        boolean rson = dfs(root.right, p, q);
+        if ((lson && rson) || ((root.val == p.val || root.val == q.val) && (lson || rson))) {
+            ans = root;
+        }
+        return lson || rson || (root.val == p.val || root.val == q.val);
+    }
+
+    /**
      * 二叉树的锯齿形层序遍历
      * 给你二叉树的根节点 root ，返回其节点值的 锯齿形层序遍历 。
      * （即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
