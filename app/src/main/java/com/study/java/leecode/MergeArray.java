@@ -1,6 +1,9 @@
 package com.study.java.leecode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * 给你两个按 非递减顺序 排列的整数数组nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
@@ -15,6 +18,12 @@ public class MergeArray {
         int[] num2 = new int[]{2, 5, 6};
         merge(num1, 3, num2, 3);
         System.out.println(Arrays.toString(num1));
+
+        int[][] intervals = {{1, 3}, {15, 18}, {2, 6}, {8, 10}};
+        int[][] result = merge(intervals);
+        for (int i = 0; i < result.length; i++) {
+            System.out.println(Arrays.toString(result[i]));
+        }
     }
 
     /**
@@ -62,5 +71,39 @@ public class MergeArray {
         while (p2 >= 0) {
             nums1[p--] = nums2[p2--];
         }
+    }
+
+    /**
+     * 合并区间
+     * 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。
+     * 请你合并所有重叠的区间，并返回一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。
+     * 示例 1：
+     * 输入：intervals = [[1,3],[2,6],[8,10],[15,18]]
+     * 输出：[[1,6],[8,10],[15,18]]
+     * 解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+     */
+    public static int[][] merge(int[][] intervals) {
+        if (intervals.length == 0) {
+            return new int[0][2];
+        }
+        //将数组按照起始数字排序
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        List<int[]> list = new ArrayList<>();
+
+        for (int i = 0; i < intervals.length; i++) {
+            int L = intervals[i][0];
+            int R = intervals[i][1];
+            if (list.size() == 0 || list.get(list.size() - 1)[1] < L) {
+                list.add(intervals[i]);
+            } else {
+                list.get(list.size() - 1)[1] = Math.max(list.get(list.size() - 1)[1], R);
+            }
+        }
+        return list.toArray(new int[list.size()][2]);
     }
 }
