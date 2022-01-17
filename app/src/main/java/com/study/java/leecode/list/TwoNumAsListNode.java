@@ -145,7 +145,6 @@ public class TwoNumAsListNode {
      * a) 在问题1的基础上，把待处理list反转得出结果再反转即可
      */
     public ListNode addInList(ListNode head1, ListNode head2) {
-        // write code here
         ListNode reverseList1 = reverseList(head1);
         ListNode reverseList2 = reverseList(head2);
         ListNode reverseResultList = addInList2(reverseList1, reverseList2);
@@ -153,7 +152,6 @@ public class TwoNumAsListNode {
     }
 
     public ListNode addInList2(ListNode head1, ListNode head2) {
-        // write code here
         ListNode resultNode = new ListNode(0);
         ListNode curNode = resultNode;
         int sum;
