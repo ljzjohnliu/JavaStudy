@@ -200,6 +200,12 @@
         <activity
             android:name="com.study.android.bitmap.TestBitmapActivity"
             android:label="Bitmap相关的Activity" />
+        <activity
+            android:name="com.study.android.slideconflict.SlideConflictActivity1"
+            android:label="内外滑动方向不一致滑动冲突" />
+        <activity
+            android:name="com.study.android.slideconflict.SlideConflictActivity2"
+            android:label="内外滑动方向一致滑动冲突" />
 
         <service
             android:name="com.study.android.multiprocess.NewProcessService"

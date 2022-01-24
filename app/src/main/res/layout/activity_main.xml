@@ -223,6 +223,22 @@
                 android:layout_marginTop="10dp"
                 android:text="Bitmap相关处理"
                 android:textAllCaps="false" />
+            <Button
+                android:id="@+id/slide_conflict1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="内外滑动方向不一致滑动冲突"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/slide_conflict2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="内外滑动方向一致滑动冲突"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

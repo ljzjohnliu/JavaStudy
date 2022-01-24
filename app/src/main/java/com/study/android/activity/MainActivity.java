@@ -27,6 +27,8 @@ import com.study.android.recyclerview.DemoListActivity;
 import com.study.android.recyclerview.TestRVActivity;
 import com.study.android.recyclerview2.TestRvActivity;
 import com.study.android.service.TestServiceActivity;
+import com.study.android.slideconflict.SlideConflictActivity1;
+import com.study.android.slideconflict.SlideConflictActivity2;
 import com.study.android.testfrag.AttachActivity;
 import com.study.android.testfrag.ShowActivity;
 import com.study.android.testfrag.viewpager2.ViewPager2Activity;
@@ -49,7 +51,7 @@ public class MainActivity extends BaseSimpleActivity {
             R.id.test_video_view, R.id.test_surface_view, R.id.test_deal_bitmap, R.id.test_fragment,
             R.id.test_view_pager2, R.id.test_recycler_view, R.id.test_recycler_view2,
             R.id.test_new_task, R.id.test_webview, R.id.test_more_process, R.id.test_animation,
-            R.id.test_bitmap})
+            R.id.test_bitmap, R.id.slide_conflict1, R.id.slide_conflict2})
     public void onJumpClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -121,6 +123,12 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_bitmap:
                 intent.setClass(this, TestBitmapActivity.class);
+                break;
+            case R.id.slide_conflict1:
+                intent.setClass(this, SlideConflictActivity1.class);
+                break;
+            case R.id.slide_conflict2:
+                intent.setClass(this, SlideConflictActivity2.class);
                 break;
         }
         startActivity(intent);
