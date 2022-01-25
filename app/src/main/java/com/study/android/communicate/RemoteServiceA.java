@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -26,6 +27,7 @@ public class RemoteServiceA extends Service {
                     Bundle bundle = msg.getData();
                     String str = bundle.getString("aaa");
                     Log.d(TAG, "handleMessage: msg.replyTo = " + msg.replyTo + ", str = " + str);
+                    Toast.makeText(RemoteServiceA.this, str, Toast.LENGTH_SHORT).show();
                     Messenger replyTo = msg.replyTo; //此处往下是用来回复消息给客户端 ProcessComActivity 的
                     Message replyMsg = Message.obtain(null, 2);
                     Bundle bundle1 = new Bundle();

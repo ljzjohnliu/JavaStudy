@@ -152,6 +152,13 @@
             android:priority="1000"
             android:process=":remoteA" />
 
+        <service
+            android:name="com.study.android.communicate.RemoteServiceB"
+            android:exported="true"
+            android:label="RemoteServiceB"
+            android:priority="1000"
+            android:process=":remoteB" />
+
         <!-- 验证Fragment切换生命周期 -->
         <activity
             android:name=".testfrag.MainActivity"
