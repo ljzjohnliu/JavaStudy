@@ -22,6 +22,13 @@ public abstract class Wanda extends Cinema {
                 super.play();
             }
         };
-        Wanda wanda2 = new Wanda();
+//        Wanda wanda2 = new Wanda();
     }
+}
+
+/**
+ * 可以，但一个源文件中最多只能有一个公开类（public class）而且文件名必须和公开类的类名完全保持一致。
+ */
+class TestClass {
+
 }
