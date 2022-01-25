@@ -8,7 +8,7 @@ public class Book implements Parcelable {
     public String title;
 
     Book() {
-        this("默认的书名");
+        this("默认的书名《Java编程思想》");
     }
 
     Book(String name) {

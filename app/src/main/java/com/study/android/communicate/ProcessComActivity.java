@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
@@ -29,27 +32,67 @@ public class ProcessComActivity extends BaseSimpleActivity {
     public static final int RESULT_FROM_REMOTE = 1001;
     @BindView(R.id.title)
     TextView titleTv;
+    @BindView(R.id.print_result)
+    TextView resultTv;
 
     private IBookAidlInterface iBookAidlInterface = null;
 
+    /**
+     * 如果是远程服务的话，这里onServiceConnected的第二个参数是android.os.BinderProxy！！！
+     * java.lang.ClassCastException: android.os.BinderProxy cannot be cast to com.study.android.communicate.RemoteServiceA$MyBinder
+     */
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            iBookAidlInterface = IBookAidlInterface.Stub.asInterface(service);
-            try {
-                String bookName = iBookAidlInterface.getTitle();
-                Log.d(TAG, "getTitle: bookName = " + bookName);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                Log.d(TAG, "onServiceConnected: e = " + e);
+            Log.d(TAG, "onServiceConnected: name = " + name + ", service = " + service);
+            Log.d(TAG, "onServiceConnected: getPackageName = " + name.getPackageName() + ", getClassName = " + name.getClassName()
+                    + ", getShortClassName = " + name.getShortClassName());
+            if ("com.study.android.communicate.RemoteService".equals(name.getClassName())) {
+                iBookAidlInterface = IBookAidlInterface.Stub.asInterface(service);
+                try {
+                    String bookName = iBookAidlInterface.getTitle();
+                    Log.d(TAG, "getTitle: bookName = " + bookName);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onServiceConnected: e = " + e);
+                }
+            } else if ("com.study.android.communicate.RemoteServiceA".equals(name.getClassName())) {
+                Messenger messenger = new Messenger(service);
+                Message msg = Message.obtain(null, 1);
+                Bundle bundle = new Bundle();
+                bundle.putString("aaa", "主进程给 remote 进程发消息啦");
+                msg.setData(bundle);
+                msg.replyTo = localMessenger; //这行代码用于客户端A接收服务端请求 设置的消息接收者
+                try {
+                    messenger.send(msg);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
+            Log.d(TAG, "onServiceDisconnected: ----");
         }
     };
+
+    private class MessageHandler extends Handler {  //创建的接受消息的handler
+        @Override
+        public void handleMessage(Message msg) {
+            Log.d(TAG, "handleMessage: msg = " + msg);
+            switch (msg.what) {
+                case 2:
+                    Bundle bundle = msg.getData();
+                    String str = bundle.getString("bbb");
+                    Log.d(TAG, "handleMessage: str = " + str);
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    }
+
+    Messenger localMessenger = new Messenger(new MessageHandler());
 
     /**
      * bindService启动流程
@@ -83,7 +126,7 @@ public class ProcessComActivity extends BaseSimpleActivity {
         unbindService(serviceConnection);
     }
 
-    @OnClick({R.id.remote_activity, R.id.get_book})
+    @OnClick({R.id.remote_activity, R.id.get_book, R.id.modify_book, R.id.messenger})
     public void onClick(View view) {
         switch (view.getId()) {
             /**
@@ -105,12 +148,28 @@ public class ProcessComActivity extends BaseSimpleActivity {
                 break;
             case R.id.get_book:
                 try {
-                    iBookAidlInterface.setTitle("我是一个title");
-                    Log.d(TAG, "get_book, onClick: modify bookName = " + iBookAidlInterface.getTitle());
+                    resultTv.setText("获取到远程进程的书名：" + iBookAidlInterface.getTitle());
+                    Log.d(TAG, "get_book, onClick: get bookName = " + iBookAidlInterface.getTitle());
                 } catch (RemoteException e) {
                     e.printStackTrace();
                     Log.d(TAG, "get_book, onClick: e = " + e);
                 }
+                break;
+            case R.id.modify_book:
+                try {
+                    iBookAidlInterface.setTitle("修改后书名《Android开发艺术》");
+                    Log.d(TAG, "get_book, onClick: modify bookName = " + iBookAidlInterface.getTitle());
+                    resultTv.setText("修改书名成功，再查询一下看看吧");
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "get_book, onClick: e = " + e);
+                    resultTv.setText("修改书名失败 " + e);
+                }
+                break;
+            case R.id.messenger:
+                Intent intent = new Intent(this, RemoteServiceA.class);
+                intent.putExtra("from", "ProcessComActivity");
+                bindService(intent, serviceConnection, BIND_AUTO_CREATE);
                 break;
         }
     }
