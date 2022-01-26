@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.study.android.R;
+import com.study.android.activity.TestEnum;
 import com.study.android.base.BaseSimpleActivity;
 import com.study.android.utils.ProcessUtil;
 
@@ -33,6 +34,8 @@ public class RemoteActivity extends BaseSimpleActivity {
         titleTv.setText(ProcessUtil.getCurrentProcessName());
         String name = getIntent().getStringExtra(ProcessComActivity.KEY_FROM);
         titleTv.setText("来自Main的value:" + name);
+        TestEnum enumTest = (TestEnum)getIntent().getSerializableExtra("enum");
+        Log.d("enum", "RemoteActivity onCreate: enumTest = " + enumTest.toString());
 
         /**
          * 匿名内部类应该是平时我们编写代码时用得最多的，在编写事件监听的代码时使用匿名内部类不但方便，而且使代码更加容易维护。

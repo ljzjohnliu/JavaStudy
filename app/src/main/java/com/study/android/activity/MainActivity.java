@@ -1,5 +1,7 @@
 package com.study.android.activity;
 
+import static com.study.android.activity.TestEnum.TEST_ITEM1;
+
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,6 +61,8 @@ public class MainActivity extends BaseSimpleActivity {
                 // 此方法不能实现跨应用调用
 //                intent.setClass(this, ActivityA.class);
                 intent.setComponent(new ComponentName("com.study.android", "com.study.android.lifecycle.ActivityA"));
+                intent.putExtra("enum", TEST_ITEM1);
+                Log.d(TAG, "onJumpClick: TEST_ITEM1 = " + TEST_ITEM1);
                 break;
             case R.id.test_service_life:
                 intent.setClass(this, TestServiceActivity.class);

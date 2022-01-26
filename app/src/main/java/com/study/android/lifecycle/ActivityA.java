@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.study.android.R;
+import com.study.android.activity.TestEnum;
 import com.study.android.base.BaseSimpleActivity;
 
 import java.io.Serializable;
@@ -63,6 +64,8 @@ public class ActivityA extends BaseSimpleActivity {
                 Log.d(TAG, "------onCreate: name = " + dataset.getName() + ", state = " + dataset.getState());
             }
         }
+        TestEnum enumTest = (TestEnum)getIntent().getSerializableExtra("enum");
+        Log.d("enum", "onCreate: enumTest = " + enumTest);
         setContentView(R.layout.activity_a);
         ButterKnife.bind(this);
         mDataset = new SeriesDataset();

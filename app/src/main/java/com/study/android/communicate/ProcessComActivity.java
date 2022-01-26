@@ -1,5 +1,7 @@
 package com.study.android.communicate;
 
+import static com.study.android.activity.TestEnum.TEST_ITEM2;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -208,6 +210,7 @@ public class ProcessComActivity extends BaseSimpleActivity {
                 Log.d(TAG, "remote_activity, onClick: this = " + this);
                 Intent mainIntent = new Intent(ProcessComActivity.this, RemoteActivity.class);
                 mainIntent.putExtra(KEY_FROM, "main process");
+                mainIntent.putExtra("enum", TEST_ITEM2);
                 myActivityLauncher.launch(mainIntent);
                 break;
             case R.id.get_book:
