@@ -166,6 +166,7 @@ public class TreeTest {
             if (curEnd == node) {
                 list.add(node.val);
                 curEnd = nextEnd;
+                nextEnd = null;
             }
         }
         return list;
@@ -193,6 +194,7 @@ public class TreeTest {
                 lists.add(curLevel++, list);
                 list = new ArrayList<>();
                 curEnd = nextEnd;
+                nextEnd = null;
             }
         }
         return lists;

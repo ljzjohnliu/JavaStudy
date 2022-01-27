@@ -29,7 +29,25 @@ public class PailList {
         ListNode listNode3 = new ListNode(3, listNode4);
         ListNode listNode2 = new ListNode(2, listNode3);
         ListNode listNode1 = new ListNode(1, listNode2);
-        System.out.println("isPail = " + isPail(listNode1));
+        System.out.println("isPail = " + isPail9(listNode1));
+    }
+
+    private static boolean isPail9(ListNode head) {
+        ListNode curNode = head;
+        Stack<ListNode> stack = new Stack<>();
+        while (curNode != null) {
+            stack.push(curNode);
+            curNode = curNode.next;
+        }
+        boolean isPail = true;
+        curNode = head;
+        while (curNode != null) {
+            if (curNode.val != stack.pop().val) {
+                isPail = false;
+            }
+            curNode = curNode.next;
+        }
+        return isPail;
     }
 
     /**
