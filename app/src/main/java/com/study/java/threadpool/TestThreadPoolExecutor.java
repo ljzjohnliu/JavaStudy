@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
@@ -49,12 +50,12 @@ public class TestThreadPoolExecutor {
     public static void main(String[] args) {
 //        useExecutor1();
 //        useExecutor2();
-        useExecutor3();
+//        useExecutor3();
 //        useSingleThreadExecutor();
 //        useCachedThreadPool();
 //        useFixedThreadPool();
 //        useScheduledThreadPool();
-//        useWorkStealingPool();
+        useWorkStealingPool();
     }
 
     /**
@@ -204,10 +205,39 @@ public class TestThreadPoolExecutor {
 //            MyTask myTask = new MyTask(i);
 //            executor.execute(myTask);//精灵线程
 
+//            ForkJoinTask<Integer> task = executor.submit(new ForkJoinTask<Integer>() {
+//                @Override
+//                public Integer getRawResult() {
+//                    System.out.println("-----------getRawResult----------");
+//                    return 123;
+//                }
+//
+//                @Override
+//                protected void setRawResult(Integer value) {
+//                    System.out.println("-----------setRawResult----------");
+//                }
+//
+//                @Override
+//                protected boolean exec() {
+//                    System.out.println("-----------exec----------");
+//                    return true;
+//                }
+//            });
+
+            //Future 的 get方法是阻塞的！
+//            try {
+//                System.out.println(i + ", task.isDone() = " + task.isDone() + ", result = " + task.get());
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+
             CallTask callTask = new CallTask(i);
             Future<Integer> future = executor.submit(callTask);
             System.out.println(i + ", future.isDone() = " + future.isDone());
-            System.out.println(executor.toString());
+//            System.out.println(executor.toString());
         }
         try {
             System.in.read();
