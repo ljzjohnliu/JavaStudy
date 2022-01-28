@@ -205,6 +205,8 @@ public class MainActivity extends BaseSimpleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        int psNum = Runtime.getRuntime().availableProcessors();
+        Log.d(TAG, "onCreate: psNum = " + psNum);
         Log.d(TAG, "onCreate: thread id = " + Thread.currentThread().getId());
 //        updateUIWithThread("onCreate", true);
         new Thread() {

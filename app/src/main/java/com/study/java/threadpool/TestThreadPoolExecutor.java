@@ -2,6 +2,7 @@ package com.study.java.threadpool;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -13,6 +14,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -46,12 +48,13 @@ public class TestThreadPoolExecutor {
 
     public static void main(String[] args) {
 //        useExecutor1();
+//        useExecutor2();
+        useExecutor3();
 //        useSingleThreadExecutor();
 //        useCachedThreadPool();
 //        useFixedThreadPool();
 //        useScheduledThreadPool();
-        useWorkStealingPool();
-//        useWorkStealingPool2();
+//        useWorkStealingPool();
     }
 
     /**
@@ -62,20 +65,66 @@ public class TestThreadPoolExecutor {
      */
     private static void useExecutor1() {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS,
-                /*new ArrayBlockingQueue<Runnable>(5)*/new LinkedBlockingQueue<>(1), new ThreadFactory() {
+                /*new ArrayBlockingQueue<Runnable>(5)*/new LinkedBlockingQueue<>(2), new ThreadFactory() {
             @Override
             public Thread newThread(Runnable r) {
-                return new Thread(r);
+                return new Thread(r, "测试线程");
             }
         });
 
         for (int i = 0; i < 15; i++) {
             MyTask myTask = new MyTask(i);
             executor.execute(myTask);
-            System.out.println("线程池中线程数目：" + executor.getPoolSize() + "，队列中等待执行的任务数目：" +
-                    executor.getQueue().size() + "，已执行完别的任务数目：" + executor.getCompletedTaskCount());
+            System.out.println(executor.toString());
         }
         executor.shutdown();
+        System.out.println(executor.toString());
+    }
+
+    private static void useExecutor2() {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS,
+                /*new ArrayBlockingQueue<Runnable>(5)*/new LinkedBlockingQueue<>(2), new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(r, "测试线程");
+            }
+        }, new RejectedExecutionHandler() {//如果觉得以上几种策路都不合适，那么可以自定义符合场景的拒绝策路。需要实现RejectedExecutionHandler接口，并将自己的逻辑写在rejectedExecution方法内。
+            @Override
+            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                System.out.println("r = " + r + ", executor = " + executor.toString());
+            }
+        });
+
+        for (int i = 0; i < 15; i++) {
+            MyTask myTask = new MyTask(i);
+            executor.execute(myTask);
+            System.out.println(executor.toString());
+        }
+        executor.shutdown();
+        System.out.println(executor.toString());
+    }
+
+    private static void useExecutor3() {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS,
+                /*new ArrayBlockingQueue<Runnable>(5)*/new LinkedBlockingQueue<>(2), new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(r, "测试线程");
+            }
+        },
+//                new ThreadPoolExecutor.AbortPolicy()//线程池默认的策路，如果元表添加到线程池失败，会抛出RejectedExecutionException异常
+//                new ThreadPoolExecutor.DiscardPolicy()//如果添加失败，则放弃，并且不会抛出任何异常
+//                new ThreadPoolExecutor.DiscardOldestPolicy()//如果添加到线程池失败，会将队列中最早添加的元表移除，再尝试添加，如果失败则按该策路不浙重试
+                new ThreadPoolExecutor.CallerRunsPolicy()//如果添加失败，那么主线程会自己调用执行器中的execute方法来执行改任务
+        );
+
+        for (int i = 0; i < 15; i++) {
+            MyTask myTask = new MyTask(i);
+            executor.execute(myTask);
+            System.out.println(executor.toString());
+        }
+        executor.shutdown();
+        System.out.println(executor.toString());
     }
 
     /**
@@ -104,8 +153,7 @@ public class TestThreadPoolExecutor {
         for (int i = 0; i < 15; i++) {
             MyTask myTask = new MyTask(i);
             executor.execute(myTask);
-            System.out.println("线程池中线程数目：" + executor.getPoolSize() + "，队列中等待执行的任务数目：" +
-                    executor.getQueue().size() + "，已执行完别的任务数目：" + executor.getCompletedTaskCount());
+            System.out.println(executor.toString());
         }
         executor.shutdown();
     }
@@ -120,8 +168,7 @@ public class TestThreadPoolExecutor {
         for (int i = 0; i < 15; i++) {
             MyTask myTask = new MyTask(i);
             executor.execute(myTask);
-            System.out.println("线程池中线程数目：" + executor.getPoolSize() + "，队列中等待执行的任务数目：" +
-                    executor.getQueue().size() + "，已执行完别的任务数目：" + executor.getCompletedTaskCount());
+            System.out.println(executor.toString());
         }
         executor.shutdown();
     }
@@ -138,8 +185,7 @@ public class TestThreadPoolExecutor {
             MyTask myTask = new MyTask(i);
             executor.schedule(myTask, (15 - i), TimeUnit.SECONDS);
 //            executor.execute(myTask);
-            System.out.println("线程池中线程数目：" + executor.getPoolSize() + "，队列中等待执行的任务数目：" +
-                    executor.getQueue().size() + "，已执行完别的任务数目：" + executor.getCompletedTaskCount());
+            System.out.println(executor.toString());
         }
         executor.shutdown();
     }
@@ -161,6 +207,7 @@ public class TestThreadPoolExecutor {
             CallTask callTask = new CallTask(i);
             Future<Integer> future = executor.submit(callTask);
             System.out.println(i + ", future.isDone() = " + future.isDone());
+            System.out.println(executor.toString());
         }
         try {
             System.in.read();
@@ -181,7 +228,7 @@ class MyTask implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("正在执行task " + taskNum);
+        System.out.println("正在执行task " + taskNum + ", threadId = " + Thread.currentThread());
         try {
             Thread.currentThread().sleep(2000);
         } catch (InterruptedException e) {
