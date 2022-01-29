@@ -5,6 +5,24 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 采用阻塞队列实现生产者消费者模型
+ * 阻塞队列的几个api
+ * 1、会抛出异常的三个方法
+ * add:将非空元素加入队列中，如果能够容纳，返回true，否则trows IllegalStateException
+ * remove: 移除队列头部元素，如果队列为空，trows NoSuchElementException
+ * element: 取出队列头部元素，如果队列为空，trows exception
+ *
+ * 2、返回值
+ * offer: 将非空元素加入队列中,如果BlockingQueue可以容纳,则返回true,否则返回false.
+ * poll: 移除队列头部元素，如果队列为空，返回null
+ * peek: 取出队列头部元素，如果队列为空，返回null
+ *
+ * 3.blocks
+ * put: 添加元素到队列，如果队列已满,线程进入等待，直到有空间
+ * take: 移除队列头部元素，如果队列为空,线程进入等待，直到有新的数据加入
+ *
+ * 4.Times Out
+ * offer (E e, long timeout, TimeUnit unit): 将非空元素加入队列中,在等待的时间内如果可以容纳，返回true,否则返回false
+ * poll (long timeout, TimeUnit unit): 移除队列头部元素，在等待的时间内如果队列为空，返回null
  */
 public class ProduceConsume {
 
@@ -31,9 +49,16 @@ class Producer implements Runnable {
 
     @Override
     public void run() {
+        //以下写法是为了验证阻塞队列的几个api用法
+//        while (true) {
+//            boolean is = queue.offer(produce());
+////            queue.remove();
+//            System.out.println("----BlockingQueue---size = " + queue.size() + ", isSuccess = " + is);
+//        }
         try {
             while (true) {
                 queue.put(produce());
+                System.out.println("----BlockingQueue---size = " + queue.size());
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -42,7 +67,7 @@ class Producer implements Runnable {
 
     String produce() {
         try {
-            Thread.sleep(20);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -74,7 +99,7 @@ class Consumer implements Runnable {
 
     void consume(String s) {
         try {
-            Thread.sleep(200);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
