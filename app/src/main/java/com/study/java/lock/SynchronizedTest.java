@@ -19,9 +19,11 @@ package com.study.java.lock;
  * 4. 修饰一个类,对类同步
  *
  * 总结
- * 1、当多个线程同时执行synchronized(x){}同步代码块时呈同步效果。当其他线程执行x对象中的synchronized同步方法时呈同步效果。当其他线程执行x对象方法中的synchronized(this)代码块时也呈同步效果。
+ * 1、当多个线程同时执行synchronized(x){}同步代码块时呈同步效果。
+ *    当其他线程执行x对象中的synchronized同步方法时呈同步效果。
+ *    当其他线程执行x对象方法中的synchronized(this)代码块时也呈同步效果。
  * 2. 无论synchronized关键字加在方法上还是对象上，如果它作用的对象是非静态的，则它取得的锁是对象；
- * 如果synchronized作用的对象是一个静态方法或一个类，则它取得的锁是对类，该类所有的对象同一把锁。
+ *    如果synchronized作用的对象是一个静态方法或一个类，则它取得的锁是对类，该类所有的对象同一把锁。
  * 3. 每个对象只有一个锁（lock）与之相关联，谁拿到这个锁谁就可以运行它所控制的那段代码。
  * 4. 实现同步是要很大的系统开销作为代价的，甚至可能造成死锁，所以尽量避免无谓的同步控制。
  */
@@ -91,8 +93,9 @@ public class SynchronizedTest {
         try {
             System.out.println("Method 3 this lock = " + this + ", class lock = " + SynchronizedTest.class);
             synchronized (this) {
-                System.out.println("Method 3 execute");
+                System.out.println("Method 3 进入锁，开始execute");
                 Thread.sleep(3000);
+                System.out.println("Method 3 马上要让出锁");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -103,9 +106,11 @@ public class SynchronizedTest {
     public void method4(){
         System.out.println("Method 4 start");
         try {
+            System.out.println("Method 4 this lock = " + this + ", class lock = " + SynchronizedTest.class);
             synchronized (this) {
-                System.out.println("Method 4 execute");
+                System.out.println("Method 4 进入锁，开始execute");
                 Thread.sleep(1000);
+                System.out.println("Method 4 马上要让出锁");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -117,8 +122,8 @@ public class SynchronizedTest {
 //        testStaticSync();
 //        testNormalSync();
 //        testBlockSync();
-        testBlockSync2();
-//        testClassSync();
+//        testBlockSync2();
+        testClassSync();
     }
 
     /**
@@ -128,26 +133,32 @@ public class SynchronizedTest {
         final SynchronizedTest test = new SynchronizedTest();
         final SynchronizedTest test2 = new SynchronizedTest();
 
-        new Thread(new Runnable() {
+        Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 test.staticMethod1();
             }
-        }).start();
+        });
 
-        new Thread(new Runnable() {
+        Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
                 test2.staticMethod2();
             }
-        }).start();
+        });
+        // 如果start紧跟在new Thread后那么一般情况下都会是靠前的线程先执行，因为new Thread是有时间开销的；
+        // 但如下这样写法 其实不能保证这俩线程谁先执行，这个取决于CPU时间片分配！
+        t1.start();
+        t2.start();
     }
 
     /**
      * 验证synchronized修饰普通方法,对普通方法同步
+     * 这里需要时同一个对象才存在锁竞争，如果不同的对象不存在锁竞争！
      */
     private static void testNormalSync() {
         final SynchronizedTest test3 = new SynchronizedTest();
+//        final SynchronizedTest test4 = new SynchronizedTest();
 
         new Thread(new Runnable() {
             @Override
@@ -159,25 +170,31 @@ public class SynchronizedTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                test3.method2();
+                test3.method2();//如果这里使用test4的话 就不存在锁竞争
             }
         }).start();
     }
 
+    /**
+     * 验证synchronized修饰语句块,并且使用的是this对象锁
+     * 这里需要时同一个对象才存在锁竞争，如果不同的对象不存在锁竞争！
+     * 假设synchronized修饰语句块使用的是SynchronizedTest.class那么将是类锁！
+     */
     private static void testBlockSync() {
-        final SynchronizedTest test = new SynchronizedTest();
+        final SynchronizedTest test1 = new SynchronizedTest();
+        final SynchronizedTest test2 = new SynchronizedTest();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                test.method3();
+                test1.method3();
             }
         }).start();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                test.method4();
+                test2.method4();
             }
         }).start();
     }

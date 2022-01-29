@@ -1,9 +1,5 @@
 package com.study.java.lock;
 
-import com.study.java.base.Shape;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,14 +12,8 @@ public class TestLock {
     static int count = 0;
 
     public static void main(String[] args) throws InterruptedException {
-//        testAtomicReference();
-        testSimpleSpinningLock();
-    }
-
-    public void testCountDownLatch() {
-        CountDownLatch countDownLatch = new CountDownLatch(5);
-        Mutex mutex;
-        Collections.synchronizedList(new ArrayList<>());
+        testAtomicReference();
+//        testSimpleSpinningLock();
     }
 
     /* ---------------------悲观锁的使用方式---------------------- */
@@ -33,16 +23,16 @@ public class TestLock {
 
     //这里可以指定是公平锁还是非公平锁
     private ReentrantLock lock = new ReentrantLock(true);//需要保证多个线程使用一个锁
+
     public void modifyPublicResources() {
         lock.lock();
-        lock.lock();
         // 操作同步资源
-        lock.unlock();
         lock.unlock();
     }
 
     /* ---------------------乐观锁的使用方式---------------------- */
     private AtomicInteger atomicInteger = new AtomicInteger();//保证多个线程使用同一个AtomicInteger
+
     public void testAtomicInteger() {
         atomicInteger.incrementAndGet();//执行自增1
     }
@@ -63,15 +53,18 @@ public class TestLock {
         AtomicReference<User> atomicReference = new AtomicReference<>();
         atomicReference.set(user1);
 
-        //把 user2 赋给 atomicReference
+        //把 user2 赋给 atomicReference 成功 因为当前的值就是user1跟预期一致！
         atomicReference.compareAndSet(user1, user2);
         System.out.println(atomicReference.get().toString());
 
-        //把 user3 赋给 atomicReference
+        //把 user3 赋给 atomicReference 成功 因为当前的值就是user2跟预期不一致！
         atomicReference.compareAndSet(user1, user3);
         System.out.println(atomicReference.get().toString());
     }
 
+    /**
+     * 自定义 SimpleSpinningLock 实现锁功能
+     */
     public static void testSimpleSpinningLock() throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         CountDownLatch countDownLatch = new CountDownLatch(10);
@@ -90,7 +83,8 @@ public class TestLock {
         }
         System.out.println("等待打印count----");
         countDownLatch.await();
-        // 多次执行输出均为：100 ，实现了锁的基本功能
+        // 多次执行输出均为：10 ，实现了锁的基本功能
         System.out.println(count);
+        executorService.shutdown();
     }
 }
