@@ -1,5 +1,7 @@
 package com.study.java.queue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -31,9 +33,23 @@ public class ProduceConsume {
         Producer p = new Producer(queue, "PPPP");
         Consumer c1 = new Consumer(queue, "1111");
         Consumer c2 = new Consumer(queue, "2222");
-        new Thread(p).start();
-        new Thread(c1).start();
-        new Thread(c2).start();
+//        new Thread(p).start();
+        try {
+            queue.put("AAAA");
+            queue.put("BBBB");
+            queue.put("CCCC");
+            queue.put("DDDD");
+            queue.put("EEEE");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<String> list = new ArrayList<>();
+        queue.drainTo(list, 6);
+        for (String str : list) {
+            System.out.println("str = " + str);
+        }
+//        new Thread(c1).start();
+//        new Thread(c2).start();
     }
 }
 

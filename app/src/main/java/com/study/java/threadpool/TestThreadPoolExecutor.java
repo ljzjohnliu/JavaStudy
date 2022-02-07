@@ -8,7 +8,9 @@ import androidx.annotation.RequiresApi;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
@@ -17,6 +19,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -55,7 +58,39 @@ public class TestThreadPoolExecutor {
 //        useCachedThreadPool();
 //        useFixedThreadPool();
 //        useScheduledThreadPool();
-        useWorkStealingPool();
+//        useWorkStealingPool();
+
+        testGet();
+    }
+
+    /**
+     *
+     */
+    public static void testGet() {
+        //1、创建一个线程池
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+        CompletionService<Integer> completionService = new ExecutorCompletionService<Integer>(executorService);
+
+        completionService.submit(new CallTask(1));
+        completionService.submit(new CallTask(2));
+
+        executorService.shutdown();
+
+        try {
+            System.out.println(completionService.take().get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println(completionService.take().get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -182,7 +217,7 @@ public class TestThreadPoolExecutor {
      */
     private static void useScheduledThreadPool() {
         ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(4);
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 25; i++) {
             MyTask myTask = new MyTask(i);
             executor.schedule(myTask, (15 - i), TimeUnit.SECONDS);
 //            executor.execute(myTask);
@@ -192,6 +227,7 @@ public class TestThreadPoolExecutor {
     }
 
     /**
+     * 工作窃取线程池， 这个在每个线程中维护一个双端队列，窃取线程和本线程从队列不同端抢任务！
      * Executors.newWorkStealingPool()
      * JDK8引入，创建持有足够线程的线程池支持给定的并行度，并通过使用多个队列减少竞争。
      */
