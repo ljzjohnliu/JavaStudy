@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.study.android.R;
 import com.study.android.base.BaseSimpleActivity;
+import com.study.android.communicate.Book;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +26,11 @@ public class ANRActivity extends BaseSimpleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anr);
         ButterKnife.bind(this);
+        if(getIntent() != null) {
+            Book book = getIntent().getParcelableExtra("book");
+            Log.d(TAG, "onCreate: book = " + book);
+            Log.d(TAG, "onCreate: id = " + book.id + ", author = " + book.author + " title = " + book.title);
+        }
     }
 
     @OnClick({R.id.sleep_tv, R.id.other_tv, R.id.start_anr_service, R.id.start_my_service, R.id.start_my_service2, R.id.send_broadcast})

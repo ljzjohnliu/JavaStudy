@@ -6,6 +6,8 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import com.study.android.animation.TestAnimationActivity;
 import com.study.android.anr.ANRActivity;
 import com.study.android.base.BaseSimpleActivity;
 import com.study.android.bitmap.TestBitmapActivity;
+import com.study.android.communicate.Book;
 import com.study.android.communicate.ProcessComActivity;
 import com.study.android.customview.TestCustomViewActivity;
 import com.study.android.event.TestEventActivity;
@@ -38,6 +41,7 @@ import com.study.android.videoview.TestDealBitmapActivity;
 import com.study.android.videoview.TestSurfaceViewActivity;
 import com.study.android.videoview.TestVideoViewActivity;
 import com.study.android.webview.WebViewActivity;
+import com.study.java.TestABCD;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,6 +76,8 @@ public class MainActivity extends BaseSimpleActivity {
                 break;
             case R.id.test_activity_anr:
                 intent.setClass(this, ANRActivity.class);
+                Book book = new Book(188, "halo", "开发艺术");
+                intent.putExtra("book", book);
                 break;
             case R.id.test_event:
                 intent.setClass(this, TestEventActivity2.class);
@@ -215,6 +221,13 @@ public class MainActivity extends BaseSimpleActivity {
                 titleTv.invalidate();
             }
         }.start();
+
+        SparseArray sparseArray1;
+        SparseIntArray sparseArray = new SparseIntArray();
+        sparseArray.put(1, 2);
+        Intent intent = getIntent();
+        intent.putExtra("key", 90);
+        intent.putExtra("bundle", new Bundle());
     }
 
     @Override
