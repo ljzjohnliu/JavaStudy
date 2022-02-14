@@ -66,7 +66,7 @@ public class ShowActivity extends BaseSimpleActivity implements MeFragment.testD
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                     homeFragment.setDataCallback(intentDataCallback);
-                    transaction.add(R.id.content, homeFragment);
+                    transaction.add(R.id.content, homeFragment, "home");
                 } else {
                     transaction.show(homeFragment);
                 }
@@ -75,7 +75,7 @@ public class ShowActivity extends BaseSimpleActivity implements MeFragment.testD
                 filmText.setTextColor(Color.RED);
                 if (filmFragment == null) {
                     filmFragment = new FilmFragment();
-                    transaction.add(R.id.content, filmFragment);
+                    transaction.add(R.id.content, filmFragment, "film");
                 } else {
                     transaction.show(filmFragment);
                 }
@@ -84,7 +84,7 @@ public class ShowActivity extends BaseSimpleActivity implements MeFragment.testD
                 meText.setTextColor(Color.RED);
                 if (meFragment == null) {
                     meFragment = new MeFragment();
-                    transaction.add(R.id.content, meFragment);
+                    transaction.add(R.id.content, meFragment, "me");
                 } else {
                     transaction.show(meFragment);
                 }

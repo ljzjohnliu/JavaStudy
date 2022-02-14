@@ -57,6 +57,7 @@ public class MeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         Log.e(TAG, "onResume");
+        Log.d(TAG, "onResume: fragment = " + getParentFragmentManager().findFragmentByTag("home"));
     }
 
     @Override

@@ -147,6 +147,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         Log.d(TAG, "onHiddenChanged: ----hidden = " + hidden);
+        Log.d(TAG, "onHiddenChanged: fragment = " + getParentFragmentManager().findFragmentByTag("me"));
         if (hidden) {
             //隐藏时所作的事情
         } else {
